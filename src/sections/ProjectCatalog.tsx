@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useEffect, useMemo } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion"; // Pastikan install framer-motion
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { projectArchive } from "@/const/projectArchive";
@@ -48,9 +48,10 @@ const ProjectCard = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
+      {/* --- UPDATE: Link sekarang mengarah ke detail page internal --- */}
       <Link
-        href={project.liveLink || "#"}
-        target={project.liveLink ? "_blank" : "_self"}
+        href={`/archive/projects/${project.slug}`}
+        className="block w-full h-full"
       >
         <div className="relative w-full h-auto overflow-hidden bg-neutral-900 border border-neutral-800 group-hover:border-neutral-700 transition-colors rounded-sm">
           {/* Badge Active / Present */}
