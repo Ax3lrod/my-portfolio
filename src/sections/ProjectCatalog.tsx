@@ -140,7 +140,7 @@ const ProjectCatalog = () => {
   const col3 = sortedProjects.filter((_, i) => i % 3 === 2);
 
   return (
-    <section className="relative w-full min-h-screen bg-black text-white px-4 md:px-12 py-24 z-30">
+    <section className="relative w-full min-h-screen bg-black text-white px-4 md:px-12 pt-20 z-30">
       <div className="flex justify-between items-end mb-16 max-w-[1600px] mx-auto border-b border-neutral-800 pb-4">
         <div>
           <h2 className="text-[8vw] md:text-[4vw] leading-[0.85] font-bold tracking-tighter text-neutral-800 uppercase select-none hover:text-neutral-700 transition-colors duration-500">
@@ -180,7 +180,7 @@ const ProjectCatalog = () => {
 
           {/* CTA Link */}
           <Link href="/archive" className="block mt-0 mb-8">
-            <div className="h-[200px] flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">
+            <div className="h-[220px] flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">
               <div className="text-center">
                 <p className="text-neutral-500 font-mono text-[10px] mb-2">
                   FULL DATABASE

@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "motion/react";
 import { ArrowDownRight, Globe, Cpu } from "lucide-react";
 import AsciiMediaRenderer from "@/components/AsciiMediaRenderer";
+import GlitchText from "@/components/GlitchText";
 
 const Hero = () => {
   return (
@@ -13,7 +14,7 @@ const Hero = () => {
         <AsciiMediaRenderer />
       </div>
 
-      {/* --- LAYER 2: Scanlines & Vignette Overlay (The "Screen" feel) --- */}
+      {/* --- LAYER 2: Scanlines & Vignette --- */}
       <div className="absolute inset-0 z-10 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-size-[100%_2px,3px_100%] contrast-125 brightness-110" />
       <div className="absolute inset-0 z-10 pointer-events-none bg-radial-gradient(circle at center, transparent 50%, black 120%)" />
 
@@ -42,7 +43,7 @@ const Hero = () => {
           >
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              AVAILABLE FOR WORK
+              SYSTEM ONLINE
             </div>
             <div className="flex items-center gap-2 text-neutral-400">
               <Globe size={12} />
@@ -53,21 +54,26 @@ const Hero = () => {
 
         {/* Center / Main Content */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
-          {/* Big Typography */}
+          {/* Big Typography with Glitch Effect */}
           <motion.div
             className="flex-1"
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
+            {/* 
+                Catatan: Saya menghapus 'mix-blend-difference' di sini karena 
+                efek glitch (RGB split) membutuhkan warna aslinya agar terlihat jelas 
+                di atas background hitam.
+            */}
             <div className="overflow-hidden">
-              <h2 className="text-[12vw] md:text-[8vw] leading-[0.85] font-semibold tracking-tighter mix-blend-difference text-white">
-                SOFTWARE
+              <h2 className="text-[12vw] md:text-[8vw] leading-[0.85] font-semibold tracking-tighter text-white">
+                <GlitchText text="SOFTWARE" altText="ソフトウェア" />
               </h2>
             </div>
             <div className="overflow-hidden">
-              <h2 className="text-[12vw] md:text-[8vw] leading-[0.85] font-semibold tracking-tighter text-neutral-500 mix-blend-difference">
-                ENGINEER
+              <h2 className="text-[12vw] md:text-[8vw] leading-[0.85] font-semibold tracking-tighter text-neutral-500">
+                <GlitchText text="ENGINEER" altText="エンジニア" />
               </h2>
             </div>
           </motion.div>

@@ -218,7 +218,7 @@ const ArchiveGrid = () => {
         <h2 className="font-mono text-xs text-neutral-500 tracking-widest mb-1">
           // ARCHIVE_VIEW
         </h2>
-        <h1 className="text-xl font-bold tracking-tight">WORLD_DATABASE</h1>
+        <h1 className="text-xl font-bold tracking-tight">PROJECT_DATABASE</h1>
       </div>
 
       {/* --- Header Right (Back Button) --- */}

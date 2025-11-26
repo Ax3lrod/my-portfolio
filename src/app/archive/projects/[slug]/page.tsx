@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use } from "react"; 
+import React, { use } from "react";
 import { projectArchive } from "@/const/projectArchive";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -160,6 +160,18 @@ export default function ProjectDetail({
                 </a>
               )}
             </div>
+
+            {/* --- NEW SECTION: ROLE --- */}
+            {project.role && (
+              <div className="pt-8 border-t border-neutral-900">
+                <h3 className="font-mono text-xs text-neutral-500 mb-4 tracking-widest">
+                  MY ROLE
+                </h3>
+                <p className="text-sm text-neutral-300 font-light leading-relaxed">
+                  {project.role}
+                </p>
+              </div>
+            )}
 
             {/* Tech Stack List */}
             <div className="pt-8 border-t border-neutral-900">
