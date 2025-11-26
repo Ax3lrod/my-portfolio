@@ -4,18 +4,15 @@
   --font-led: var(--font-led);
 }
 
-/* globals.css */
 .text-stroke-white {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

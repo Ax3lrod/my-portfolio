@@ -13,7 +13,6 @@ import {
 const Footer = () => {
   const [time, setTime] = useState("");
 
-  // Jakarta Time Logic
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -131,9 +130,8 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* --- MASSIVE TYPOGRAPHY --- */}
       <div className="relative border-t border-neutral-900">
-        {/* Back to top button positioned absolutely on the border line */}
+       
         <button
           onClick={scrollToTop}
           className="absolute -top-6 right-6 md:right-12 w-12 h-12 bg-neutral-900 border border-neutral-800 rounded-full flex items-center justify-center hover:bg-green-500 hover:text-black hover:border-green-500 transition-all duration-300 z-10 group"

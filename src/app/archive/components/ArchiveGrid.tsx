@@ -6,7 +6,6 @@ import { ArrowUpRight, Plus, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { projectArchive } from "@/const/projectArchive";
 
-// --- Card Component ---
 const ArchiveCard = ({
   item,
   index,
@@ -129,7 +128,7 @@ const ArchiveCard = ({
         </div>
 
         {/* --- Hover Decoration: Scanline --- */}
-        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_51%)] bg-[length:100%_4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 mix-blend-overlay" />
+        <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_51%)] bg-size-[100%_4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 mix-blend-overlay" />
       </Link>
     </motion.div>
   );
@@ -160,8 +159,8 @@ const ArchiveGrid = () => {
     let animationFrameId: number;
 
     // Physics constants
-    const ease = 0.08; // Lower = smoother/slower, Higher = snappier (0.05 - 0.1 is good)
-    const speed = 1.5; // Scroll speed multiplier
+    const ease = 0.08;
+    const speed = 1.5; 
 
     // Linear Interpolation
     const lerp = (start: number, end: number, factor: number) =>
@@ -173,7 +172,6 @@ const ArchiveGrid = () => {
       // Calculate difference
       const diff = targetScroll - currentScroll;
 
-      // If we are close enough to target, stop animating to save resources
       if (Math.abs(diff) < 0.5) {
         currentScroll = targetScroll;
         container.scrollLeft = currentScroll;
@@ -181,7 +179,6 @@ const ArchiveGrid = () => {
         return;
       }
 
-      // Move current towards target
       currentScroll = lerp(currentScroll, targetScroll, ease);
       container.scrollLeft = currentScroll;
 
@@ -189,14 +186,11 @@ const ArchiveGrid = () => {
     };
 
     const handleWheel = (e: WheelEvent) => {
-      // Only hijack if vertical scroll is dominant (standard mouse wheel)
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault();
 
-        // Add delta to target
         targetScroll += e.deltaY * speed;
 
-        // Clamp target to bounds (0 to maxScroll)
         const maxScroll = container.scrollWidth - container.clientWidth;
         targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
 
@@ -218,7 +212,7 @@ const ArchiveGrid = () => {
   return (
     <section className="relative w-full h-screen bg-black text-white flex flex-col justify-center overflow-hidden">
       {/* Background Grid Texture */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:100px_100px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[100px_100px] pointer-events-none" />
 
       {/* --- Header Left --- */}
       <div className="absolute top-8 md:top-12 left-6 md:left-12 z-20">
@@ -245,7 +239,6 @@ const ArchiveGrid = () => {
       </div>
 
       {/* Horizontal Scroll Container */}
-      {/* REMOVED: snap-x and snap-mandatory to allow smooth physics scroll */}
       <div
         ref={containerRef}
         className="w-full h-auto overflow-x-auto overflow-y-hidden whitespace-nowrap scrollbar-hide px-8 md:px-12 py-10 flex items-center cursor-grab active:cursor-grabbing"

@@ -6,14 +6,8 @@ import { motion, AnimatePresence } from "motion/react";
 // --- Configuration ---
 const DURATION = 5;
 const DELAY_BEFORE_EXIT = 1;
-
-// Generate strips statically to save resources
-// Ones Column: 0 to 100 (101 digits). Reversed so 0 is at bottom.
-// [0, 9, 8 ... 1, 0]
 const STRIP_ONES = Array.from({ length: 101 }, (_, i) => i % 10).reverse();
 
-// Tens Column: 0 to 10 (11 digits). Reversed.
-// [0, 9 ... 1, 0]
 const STRIP_TENS = Array.from({ length: 11 }, (_, i) => i % 10).reverse();
 
 const Preloader = ({ onComplete }: { onComplete: () => void }) => {
@@ -28,8 +22,6 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
       const now = Date.now();
       const timeLeft = Math.max(0, endTime - now);
       const progress = 1 - timeLeft / (DURATION * 1000);
-
-      // Easing: easeOutQuad (starts fast, slows down gently)
       const easedProgress = 1 - (1 - progress) * (1 - progress);
 
       const currentCount = Math.min(100, Math.round(easedProgress * 100));
@@ -49,7 +41,6 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
     return () => clearInterval(interval);
   }, [onComplete]);
 
-  // Calculate the Tens Digit (0-10)
   const tensDigit = Math.floor(count / 10);
 
   return (
@@ -92,10 +83,6 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
                   <motion.div
                     className="absolute left-0 right-0 flex flex-col items-center"
                     initial={false}
-                    // Logic:
-                    // Strip Length = 11.
-                    // tensDigit = 0 -> Show index 10 (Bottom). y = -10em
-                    // tensDigit = 1 -> Show index 9. y = -9em
                     animate={{ y: `-${10 - tensDigit}em` }}
                     transition={{
                       type: "spring",
@@ -136,10 +123,6 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
                   <motion.div
                     className="absolute left-0 right-0 flex flex-col items-center"
                     initial={false}
-                    // Logic:
-                    // Strip Length = 101.
-                    // count = 0 -> Show index 100 (Bottom). y = -100em
-                    // count = 1 -> Show index 99. y = -99em
                     animate={{ y: `-${100 - count}em` }}
                     // Low stiffness creates the "motion blur" trail effect
                     transition={{

@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useRef, useState, useEffect, useMemo } from "react";
-import { motion } from "motion/react"; // Hapus useScroll/Transform/Spring karena bikin ga rata
+import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { projectArchive } from "@/const/projectArchive";
 
-// --- CONFIGURATION ---
 const SELECTED_SLUGS = [
   "sre-its-official",
   "petrolida-2025",
@@ -15,7 +14,6 @@ const SELECTED_SLUGS = [
   "bem-its",
 ];
 
-// --- Project Card Component ---
 const ProjectCard = ({
   project,
   index,
@@ -42,7 +40,6 @@ const ProjectCard = ({
 
   return (
     <motion.div
-      // Animasi Entry: Muncul satu per satu
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
@@ -127,21 +124,16 @@ const ProjectCatalog = () => {
     );
 
     return filtered.sort((a, b) => {
-      // 1. Active ("Present") paling atas
       const aIsActive = a.endDate === "Present";
       const bIsActive = b.endDate === "Present";
       if (aIsActive && !bIsActive) return -1;
       if (!aIsActive && bIsActive) return 1;
-
-      // 2. Tahun terbaru (Descending)
       if (b.year !== a.year) return b.year - a.year;
 
-      // 3. (Opsional) Start Date Descending jika tahun sama
       return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
     });
   }, []);
 
-  // Distribute Columns (Round Robin)
   const col1 = sortedProjects.filter((_, i) => i % (isDesktop ? 3 : 2) === 0);
   const col2 = sortedProjects.filter((_, i) => i % (isDesktop ? 3 : 2) === 1);
   const col3 = sortedProjects.filter((_, i) => i % 3 === 2);
@@ -163,7 +155,7 @@ const ProjectCatalog = () => {
         </div>
       </div>
 
-      {/* Grid Container - items-start memastikan RATA ATAS */}
+      {/* Grid Container */}
       <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start">
         {/* COLUMN 1 */}
         <div className="flex flex-col">
@@ -185,7 +177,7 @@ const ProjectCatalog = () => {
             <ProjectCard key={project.slug} project={project} index={idx} />
           ))}
 
-          {/* CTA Link - Rata dengan konten terakhir di kolom 3 */}
+          {/* CTA Link */}
           <Link href="/archive" className="block mt-0 mb-8">
             <div className="h-[200px] flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">
               <div className="text-center">

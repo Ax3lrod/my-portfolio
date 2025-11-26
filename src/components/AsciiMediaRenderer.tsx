@@ -9,7 +9,6 @@ import React, {
 } from "react";
 import { parseGIF, decompressFrames } from "gifuct-js";
 
-// --- Types ---
 interface Charsets {
   [key: string]: string;
 }
@@ -23,7 +22,6 @@ interface Config {
   mediaUrl: string;
   mediaType: "gif" | "video" | "image";
   fps: number;
-  // New visual settings
   color: string;
   backgroundColor: string;
   glowIntensity: number;
@@ -130,7 +128,6 @@ const AsciiMediaRenderer: React.FC = () => {
     [config, getAsciiChar]
   );
 
-  // --- Fetching Logic (Same as before) ---
   const fetchMedia = useCallback(async () => {
     setIsLoaded(false);
     rawGifFramesRef.current = null;
@@ -168,7 +165,7 @@ const AsciiMediaRenderer: React.FC = () => {
     }
   }, [config.mediaUrl, config.mediaType]);
 
-  // --- Rendering Logic (Same as before) ---
+  // --- Rendering Logic ---
   const renderAscii = useCallback(async () => {
     if (
       !rawGifFramesRef.current &&
@@ -288,7 +285,7 @@ const AsciiMediaRenderer: React.FC = () => {
           style={{
             transform: "scale(0.8)",
             color: config.color,
-            // Dynamic Glow Logic
+
             textShadow:
               config.glowIntensity > 0
                 ? `0 0 ${config.glowIntensity}px ${config.color}, 0 0 ${
