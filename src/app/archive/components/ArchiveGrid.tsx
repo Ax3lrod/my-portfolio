@@ -48,7 +48,7 @@ const ArchiveCard = ({
       className="group relative h-[65vh] md:h-[75vh] min-w-[300px] md:min-w-[450px] shrink-0 cursor-pointer overflow-hidden border border-neutral-800 bg-neutral-900 mx-2 md:mx-4 first:ml-0 last:mr-0"
     >
       <Link
-        href={"/" + item.slug || "#"}
+        href={"/archive/projects/" + item.slug || "#"}
         target={"_blank"}
         className="block h-full w-full"
       >
