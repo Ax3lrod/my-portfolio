@@ -5,6 +5,7 @@ import { motion, useInView } from "motion/react";
 import { Trophy, ExternalLink, Paperclip, Calendar } from "lucide-react";
 import Link from "next/link";
 import { achievmentArchive } from "@/const/achievementArchive";
+import NextImage from "next/image";
 
 const AchievementCard = ({
   data,
@@ -89,9 +90,11 @@ const AchievementCard = ({
                 className="relative aspect-video bg-neutral-800 overflow-hidden rounded-sm border border-neutral-700 group/image"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <NextImage
                   src={`/archive/${img}`}
                   alt={`Evidence ${i}`}
+                  width={640}
+                  height={360}
                   className="w-full h-full object-cover opacity-60 group-hover/image:opacity-100 group-hover/image:scale-110 transition-all duration-500 grayscale group-hover/image:grayscale-0"
                   onError={(e) => {
                     e.currentTarget.style.display = "none";

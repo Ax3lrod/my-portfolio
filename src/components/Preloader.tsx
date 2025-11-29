@@ -47,7 +47,7 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className={`fixed inset-0 z-100 flex flex-col items-center justify-center bg-[#050505] text-[#EAEAEA] overflow-hidden cursor-wait font-led`}
+          className={`fixed inset-0 z-100 flex flex-col items-center justify-center bg-[#050505] text-[#EAEAEA] overflow-hidden font-led`}
           exit={{ y: "-100%" }}
           transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
         >

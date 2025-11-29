@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useRef, useState, useEffect, useMemo } from "react";
-import { motion } from "framer-motion"; // Pastikan install framer-motion
+import { motion } from "motion/react";
+import NextImage from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { projectArchive } from "@/const/projectArchive";
@@ -75,9 +76,11 @@ const ProjectCard = ({
             />
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
-            <img
+            <NextImage
               src={project.cover}
               alt={project.title}
+              width={640}
+              height={360}
               className="w-full h-auto block grayscale group-hover:grayscale-0 transition-all duration-700 ease-[0.16,1,0.3,1] scale-100 group-hover:scale-105"
             />
           )}
