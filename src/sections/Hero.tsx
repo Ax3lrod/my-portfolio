@@ -54,18 +54,12 @@ const Hero = () => {
 
         {/* Center / Main Content */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
-          {/* Big Typography with Glitch Effect */}
           <motion.div
             className="flex-1"
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* 
-                Catatan: Saya menghapus 'mix-blend-difference' di sini karena 
-                efek glitch (RGB split) membutuhkan warna aslinya agar terlihat jelas 
-                di atas background hitam.
-            */}
             <div className="overflow-hidden">
               <h2 className="text-[12vw] md:text-[8vw] leading-[0.85] font-semibold tracking-tighter text-white">
                 <GlitchText text="SOFTWARE" altText="ソフトウェア" />

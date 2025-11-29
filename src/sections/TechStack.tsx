@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { Cpu, Terminal, Layers, Database } from "lucide-react";
+import GlitchText from "@/components/GlitchText";
 
 const STACK_MARQUEE = [
   "NEXT.JS",
@@ -52,13 +53,13 @@ const TechStack = () => {
   return (
     <section className="relative w-full bg-black text-white pt-10 overflow-hidden">
       {/* --- HEADER --- */}
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 mb-12 flex justify-between items-end">
+      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 mb-6 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
         <div>
           <h2 className="font-mono text-xs text-green-500 mb-2 tracking-widest">
             // TECHNICAL_COMPETENCE
           </h2>
-          <h3 className="text-3xl md:text-5xl font-bold tracking-tighter uppercase">
-            The Stack
+          <h3 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase text-white">
+            <GlitchText text="SKILLS" altText="スキル" />
           </h3>
         </div>
         <div className="hidden md:block">
@@ -68,7 +69,7 @@ const TechStack = () => {
         </div>
       </div>
 
-      {/* --- MARQUEE ANIMATION (Running Text) --- */}
+      {/* --- MARQUEE --- */}
       <div className="relative z-10 w-full border-y border-neutral-900 bg-neutral-950/50 backdrop-blur-sm mb-20 overflow-hidden py-8">
         <div className="flex whitespace-nowrap">
           <motion.div
@@ -88,7 +89,6 @@ const TechStack = () => {
           </motion.div>
         </div>
 
-        {/* Vignette for Marquee Fade */}
         <div className="absolute inset-y-0 left-0 w-24 bg-linear-to-r from-black to-transparent z-20" />
         <div className="absolute inset-y-0 right-0 w-24 bg-linear-to-l from-black to-transparent z-20" />
       </div>

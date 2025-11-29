@@ -6,6 +6,7 @@ import NextImage from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { projectArchive } from "@/const/projectArchive";
+import GlitchText from "@/components/GlitchText";
 
 const SELECTED_SLUGS = [
   "sre-its-official",
@@ -143,24 +144,25 @@ const ProjectCatalog = () => {
   const col3 = sortedProjects.filter((_, i) => i % 3 === 2);
 
   return (
-    <section className="relative w-full min-h-screen bg-black text-white px-4 md:px-12 pt-20 z-30">
-      <div className="flex justify-between items-end mb-16 max-w-[1600px] mx-auto border-b border-neutral-800 pb-4">
+    <section className="relative w-full min-h-screen bg-black text-white pt-20 z-30">
+      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 mb-16 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
         <div>
-          <h2 className="text-[8vw] md:text-[4vw] leading-[0.85] font-bold tracking-tighter text-neutral-800 uppercase select-none hover:text-neutral-700 transition-colors duration-500">
-            Selected
-            <br />
-            <span className="text-neutral-200 ml-4 md:ml-8">Works</span>
+          <h2 className="font-mono text-xs text-green-500 mb-2 tracking-widest">
+            // ARCHIVE_PREVIEW
           </h2>
+          <h3 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase text-white">
+            <GlitchText text="SELECTED WORKS" altText="プロジェクト" />
+          </h3>
         </div>
-        <div className="hidden md:block text-right mb-1">
-          <p className="text-[10px] font-mono text-neutral-500">
+        <div className="hidden md:block text-right">
+          <p className="font-mono text-xs text-neutral-500">
             SCROLL TO EXPLORE
           </p>
         </div>
       </div>
 
       {/* Grid Container */}
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 items-start">
+      <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 px-6 md:px-12 lg:grid-cols-3 gap-6 md:gap-8 items-start">
         {/* COLUMN 1 */}
         <div className="flex flex-col">
           {col1.map((project, idx) => (

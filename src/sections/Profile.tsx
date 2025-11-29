@@ -10,6 +10,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import Image from "next/image";
+import GlitchText from "@/components/GlitchText";
 
 const Profile = () => {
   const ref = useRef(null);
@@ -69,7 +70,7 @@ const Profile = () => {
               // OPERATOR_PROFILE
             </h2>
             <h3 className="text-3xl md:text-5xl font-bold leading-tight mb-6">
-              Hello!, I'm Aryasatya Alaauddin
+              Hello!, I'm <GlitchText text="Aryasatya Alaauddin" altText="Ax3lrod" />
             </h3>
             <p className="text-neutral-400 text-lg leading-relaxed max-w-2xl">
               A passionate Web Developer with a strong focus on Front-End
