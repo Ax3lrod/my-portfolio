@@ -46,7 +46,7 @@ const CHARSETS: Charsets = {
 };
 
 const INITIAL_CONFIG: Config = {
-  width: 286,
+  width: 200,
   brightness: 1,
   contrast: 2.3,
   blur: 0,
@@ -57,7 +57,7 @@ const INITIAL_CONFIG: Config = {
   color: "#4ade80",
   backgroundColor: "#000000",
   glowIntensity: 5,
-  scale: 0.85,
+  scale: 1.0,
 };
 
 const AsciiMediaRenderer: React.FC = () => {
@@ -75,19 +75,25 @@ const AsciiMediaRenderer: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
   const frameIndexRef = useRef<number>(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const isDev = process.env.NEXT_PUBLIC_ENV === "development";
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    const handleResize = () => {
       const isMobile = window.innerWidth < 768;
 
       setConfig((prev) => ({
         ...prev,
-        width: isMobile ? 80 : 160,
-        scale: isMobile ? 0.6 : 0.8,
+        width: isMobile ? 100 : 220,
+        scale: isMobile ? 0.7 : 1.0,
       }));
-    }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const getAsciiChar = useCallback(
@@ -111,7 +117,8 @@ const AsciiMediaRenderer: React.FC = () => {
 
       const aspectRatio = height / width;
 
-      const asciiHeight = Math.floor(config.width * aspectRatio * 0.45);
+      const FONT_ASPECT = 0.55;
+      const asciiHeight = Math.floor(config.width * aspectRatio * FONT_ASPECT);
 
       canvas.width = config.width;
       canvas.height = asciiHeight;
@@ -179,7 +186,6 @@ const AsciiMediaRenderer: React.FC = () => {
     } catch (e) {
       console.error("Error fetching media", e);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config.mediaUrl, config.mediaType]);
 
   const renderAscii = useCallback(async () => {
@@ -257,10 +263,13 @@ const AsciiMediaRenderer: React.FC = () => {
   }, [fetchMedia]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
       renderAscii();
     }, 200);
-    return () => clearTimeout(timer);
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, [
     config.width,
     config.brightness,
@@ -322,13 +331,11 @@ const AsciiMediaRenderer: React.FC = () => {
       </div>
 
       <div className="p-4 space-y-4 overflow-y-auto flex-1 custom-scrollbar">
-        {/* Appearance Controls */}
         <div className="space-y-3 bg-neutral-800/50 p-2 rounded">
           <div className="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">
             Appearance
           </div>
 
-          {/* Scale Control - Added */}
           <div className="space-y-1">
             <div className="flex justify-between">
               <label>Scale (Zoom)</label>
@@ -403,7 +410,6 @@ const AsciiMediaRenderer: React.FC = () => {
           </div>
         </div>
 
-        {/* Processing Controls */}
         <div className="space-y-3">
           <div className="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">
             Processing
@@ -434,7 +440,7 @@ const AsciiMediaRenderer: React.FC = () => {
             <input
               type="range"
               min="20"
-              max="300"
+              max="400"
               step="1"
               value={config.width}
               onChange={(e) =>
@@ -516,7 +522,6 @@ const AsciiMediaRenderer: React.FC = () => {
           </div>
         </div>
 
-        {/* Media Inputs */}
         <div className="space-y-1 border-t border-neutral-700 pt-2">
           <label className="block text-neutral-500">Media URL</label>
           <input
@@ -552,11 +557,13 @@ const AsciiMediaRenderer: React.FC = () => {
       >
         <div className="relative w-full h-full">
           <pre
-            className="absolute top-1/2 left-1/2 text-[0.5rem] sm:text-[0.6rem] md:text-xs leading-2 md:leading-[0.6rem] font-mono whitespace-pre select-none transition-all duration-300"
+            className="absolute top-1/2 left-1/2 font-mono whitespace-pre select-none transition-all duration-300"
             style={{
               transform: `translate(-50%, -50%) scale(${config.scale})`,
               color: config.color,
               textAlign: "center",
+              fontSize: "10px",
+              lineHeight: "10px",
               textShadow:
                 config.glowIntensity > 0
                   ? `0 0 ${config.glowIntensity}px ${config.color}, 0 0 ${
