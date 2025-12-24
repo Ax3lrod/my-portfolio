@@ -1,57 +1,63 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import React, { useEffect, useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+  animate,
+} from "motion/react";
 
-// --- Configuration ---
-const DURATION = 5;
-const DELAY_BEFORE_EXIT = 1;
+// --- Static Configuration ---
 const STRIP_ONES = Array.from({ length: 101 }, (_, i) => i % 10).reverse();
-
 const STRIP_TENS = Array.from({ length: 11 }, (_, i) => i % 10).reverse();
 
 const Preloader = ({ onComplete }: { onComplete: () => void }) => {
-  const [count, setCount] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
+  const countMotion = useMotionValue(0);
+
+  const onesY = useTransform(countMotion, (latest) => {
+    const val = Math.round(latest);
+    return `-${100 - val}em`;
+  });
+
+  const tensY = useTransform(countMotion, (latest) => {
+    const val = Math.floor(latest / 10);
+    return `-${10 - val}em`;
+  });
+
+  const statusText = useTransform(countMotion, (latest) =>
+    latest < 100 ? "DECRYPTING..." : "ACCESS GRANTED"
+  );
+
   useEffect(() => {
-    const startTime = Date.now();
-    const endTime = startTime + DURATION * 1000;
-
-    const interval = setInterval(() => {
-      const now = Date.now();
-      const timeLeft = Math.max(0, endTime - now);
-      const progress = 1 - timeLeft / (DURATION * 1000);
-      const easedProgress = 1 - (1 - progress) * (1 - progress);
-
-      const currentCount = Math.min(100, Math.round(easedProgress * 100));
-
-      if (currentCount >= 100) {
-        setCount(100);
-        clearInterval(interval);
+    const controls = animate(countMotion, 100, {
+      duration: 4.5,
+      ease: [0.76, 0, 0.24, 1],
+      onComplete: () => {
+        setIsComplete(true);
         setTimeout(() => {
           setIsVisible(false);
           setTimeout(onComplete, 800);
-        }, DELAY_BEFORE_EXIT * 1000);
-      } else {
-        setCount(currentCount);
-      }
-    }, 20);
+        }, 1000);
+      },
+    });
 
-    return () => clearInterval(interval);
-  }, [onComplete]);
-
-  const tensDigit = Math.floor(count / 10);
+    return () => controls.stop();
+  }, [countMotion, onComplete]);
 
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.div
-          className={`fixed inset-0 z-100 flex flex-col items-center justify-center bg-[#050505] text-[#EAEAEA] overflow-hidden font-led`}
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] text-[#EAEAEA] overflow-hidden font-led"
           exit={{ y: "-100%" }}
           transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
         >
-          {/* Background Textures */}
+          {/* Background Textures (Static) */}
           <div className="absolute inset-0 pointer-events-none z-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150" />
           <div className="absolute inset-0 pointer-events-none z-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-size-[100%_3px,6px_100%]" />
 
@@ -63,9 +69,16 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
                 textShadow: "0 0 30px rgba(255, 255, 255, 0.15)",
               }}
             >
+              {/* Ghost 888 (Background Decoration) */}
+              <div className="absolute inset-0 flex justify-center opacity-[0.05] pointer-events-none blur-[1px]">
+                <span className="w-[1.2ch] flex justify-center">8</span>
+                <span className="w-[1.2ch] flex justify-center">8</span>
+                <span className="w-[1.2ch] flex justify-center">8</span>
+              </div>
+
               {/* 1. HUNDREDS (Only appears at 100) */}
               <div className="relative w-[1.2ch] h-[1em] overflow-hidden flex justify-center">
-                {count === 100 && (
+                {isComplete && (
                   <motion.span
                     initial={{ y: "-100%" }}
                     animate={{ y: 0 }}
@@ -79,17 +92,10 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
 
               {/* 2. TENS COLUMN */}
               <div className="relative w-[1.2ch] h-[1em] overflow-hidden flex justify-center">
-                {count < 100 ? (
+                {!isComplete ? (
                   <motion.div
                     className="absolute left-0 right-0 flex flex-col items-center"
-                    initial={false}
-                    animate={{ y: `-${10 - tensDigit}em` }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 50,
-                      damping: 20,
-                      mass: 1,
-                    }}
+                    style={{ y: tensY }} // Direct GPU binding
                   >
                     {STRIP_TENS.map((n, i) => (
                       <div
@@ -119,18 +125,10 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
 
               {/* 3. ONES COLUMN (The Long Strip) */}
               <div className="relative w-[1.2ch] h-[1em] overflow-hidden flex justify-center">
-                {count < 100 ? (
+                {!isComplete ? (
                   <motion.div
                     className="absolute left-0 right-0 flex flex-col items-center"
-                    initial={false}
-                    animate={{ y: `-${100 - count}em` }}
-                    // Low stiffness creates the "motion blur" trail effect
-                    transition={{
-                      type: "spring",
-                      stiffness: 35,
-                      damping: 20,
-                      mass: 1,
-                    }}
+                    style={{ y: onesY }} // Direct GPU binding
                   >
                     {STRIP_ONES.map((n, i) => (
                       <div
@@ -179,13 +177,23 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              {count < 100 ? "DECRYPTING..." : "ACCESS GRANTED"}
+              <MotionTextDisplay value={statusText} />
             </motion.div>
           </div>
         </motion.div>
       )}
     </AnimatePresence>
   );
+};
+
+const MotionTextDisplay = ({ value }: { value: any }) => {
+  const [text, setText] = useState("DECRYPTING...");
+  useEffect(() => {
+    return value.on("change", (latest: string) => {
+      setText(latest);
+    });
+  }, [value]);
+  return <>{text}</>;
 };
 
 export default Preloader;
