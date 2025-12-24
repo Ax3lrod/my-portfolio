@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useMemo } from "react";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { motion } from "motion/react";
-import NextImage from "next/image";
+import Image from "@/components/Image";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { projectArchive } from "@/const/projectArchive";
 import GlitchText from "@/components/GlitchText";
+import { getCldVideoUrl } from "next-cloudinary";
 
 const SELECTED_SLUGS = [
   "sre-its-official",
@@ -25,11 +26,30 @@ const ProjectCard = ({
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVideo =
-    project.cover?.endsWith(".mp4") || project.cover?.endsWith(".webm");
+    project.cover?.endsWith(".mp4") ||
+    project.cover?.endsWith(".webm") ||
+    project.cover?.includes("video");
+
+  const videoUrl = isVideo
+    ? getCldVideoUrl({
+        src: project.cover,
+        width: 640,
+        height: 360,
+        format: "auto",
+        quality: "auto",
+        crop: "fill",
+        gravity: "center",
+      })
+    : "";
 
   const handleMouseEnter = () => {
     if (isVideo && videoRef.current) {
-      videoRef.current.play();
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((error) => {
+          console.log("Play prevented", error);
+        });
+      }
     }
   };
 
@@ -69,7 +89,7 @@ const ProjectCard = ({
           {isVideo ? (
             <video
               ref={videoRef}
-              src={project.cover}
+              src={videoUrl}
               muted
               loop
               playsInline
@@ -77,7 +97,7 @@ const ProjectCard = ({
             />
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
-            <NextImage
+            <Image
               src={project.cover}
               alt={project.title}
               width={640}

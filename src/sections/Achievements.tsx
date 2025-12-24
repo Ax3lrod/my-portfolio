@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "motion/react";
 import {
   Trophy,
@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { achievmentArchive } from "@/const/achievementArchive";
-import NextImage from "next/image";
+import Image from "@/components/Image";
 import GlitchText from "@/components/GlitchText";
 
 const SimpleLightbox = ({
@@ -60,7 +60,7 @@ const SimpleLightbox = ({
       >
         <div className="relative w-full h-full">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <NextImage
+          <Image
             src={src}
             alt={alt}
             fill
@@ -166,15 +166,15 @@ const AchievementCard = ({
                 key={i}
                 onClick={() =>
                   onImageClick(
-                    `/archive/${img}`,
+                    `${img}`,
                     `${data.title} - Evidence ${i + 1}`
                   )
                 }
                 className="relative aspect-video bg-neutral-800 overflow-hidden rounded-sm border border-neutral-700 group/image cursor-zoom-in"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <NextImage
-                  src={`/archive/${img}`}
+                <Image
+                  src={`${img}`}
                   alt={`Evidence ${i}`}
                   width={640}
                   height={360}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import {
   Download,
@@ -9,7 +9,7 @@ import {
   Mail,
   ArrowUpRight,
 } from "lucide-react";
-import Image from "next/image";
+import Image from "@/components/Image";
 import GlitchText from "@/components/GlitchText";
 
 const Profile = () => {
@@ -39,10 +39,10 @@ const Profile = () => {
           {/* Image Frame */}
           <div className="relative aspect-3/4 w-full bg-neutral-900 rounded-sm overflow-hidden border border-neutral-800 group">
             <Image
-              src="/archive/profile.jpg"
+              src="profile"
               alt="Aryasatya Alaauddin"
               fill
-              className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out"
+              className="object-cover lg:grayscale group-hover:grayscale-0 transition-all duration-700 ease-out"
             />
 
             {/* Overlay UI Elements (HUD) */}
@@ -70,7 +70,8 @@ const Profile = () => {
               // OPERATOR_PROFILE
             </h2>
             <h3 className="text-3xl md:text-5xl font-bold leading-tight mb-6">
-              Hello!, I'm <GlitchText text="Aryasatya Alaauddin" altText="Ax3lrod" />
+              Hello!, I'm{" "}
+              <GlitchText text="Aryasatya Alaauddin" altText="Ax3lrod" />
             </h3>
             <p className="text-neutral-400 text-lg leading-relaxed max-w-2xl">
               A passionate Web Developer with a strong focus on Front-End
@@ -142,7 +143,7 @@ const Profile = () => {
                 </span>
               </div>
               <h4 className="text-lg font-bold text-white group-hover:underline decoration-green-500 underline-offset-4 decoration-2">
-                aryasatya...
+                aryasatyagigachad9@gmail.com
               </h4>
               <div className="flex items-center gap-2 mt-2 text-xs font-mono text-neutral-500 group-hover:text-green-400 transition-colors">
                 <span>SEND MESSAGE</span>

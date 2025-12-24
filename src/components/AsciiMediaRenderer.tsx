@@ -3,6 +3,16 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { parseGIF, decompressFrames } from "gifuct-js";
+import { getCldImageUrl } from "next-cloudinary";
+
+const CLOUDINARY_PUBLIC_ID = "ghostintheshell3";
+
+const generatedUrl = getCldImageUrl({
+  src: CLOUDINARY_PUBLIC_ID,
+  width: 400,
+  quality: "auto",
+  format: "gif",
+});
 
 interface Charsets {
   [key: string]: string;
@@ -41,7 +51,7 @@ const INITIAL_CONFIG: Config = {
   contrast: 2.3,
   blur: 0,
   activeCharset: "dense",
-  mediaUrl: "ghostintheshell.gif",
+  mediaUrl: generatedUrl,
   mediaType: "gif",
   fps: 30,
   color: "#4ade80",
@@ -544,7 +554,6 @@ const AsciiMediaRenderer: React.FC = () => {
           <pre
             className="absolute top-1/2 left-1/2 text-[0.5rem] sm:text-[0.6rem] md:text-xs leading-2 md:leading-[0.6rem] font-mono whitespace-pre select-none transition-all duration-300"
             style={{
-             
               transform: `translate(-50%, -50%) scale(${config.scale})`,
               color: config.color,
               textAlign: "center",

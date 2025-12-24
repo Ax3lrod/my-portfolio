@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { motion } from "motion/react";
 import { ArrowDownRight, Globe, Cpu } from "lucide-react";
 import AsciiMediaRenderer from "@/components/AsciiMediaRenderer";

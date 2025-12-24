@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo, useEffect } from "react";
+import { useRef, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Plus, ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -9,11 +9,9 @@ import { projectArchive } from "@/const/projectArchive";
 const ArchiveCard = ({
   item,
   index,
-  total,
 }: {
   item: (typeof projectArchive)[0];
   index: number;
-  total: number;
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVideo = item.cover?.endsWith(".mp4") || item.cover?.endsWith(".webm");
@@ -245,7 +243,7 @@ const ArchiveGrid = () => {
         {sortedItems.map((item, index) => (
           // REMOVED: snap-center
           <div key={item.slug} className="shrink-0">
-            <ArchiveCard item={item} index={index} total={sortedItems.length} />
+            <ArchiveCard item={item} index={index} />
           </div>
         ))}
 

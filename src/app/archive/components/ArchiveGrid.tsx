@@ -1,28 +1,53 @@
 "use client";
 
-import React, { useRef, useMemo, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useRef, useMemo, useEffect } from "react";
+import { motion } from "motion/react";
 import { ArrowUpRight, Plus, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { projectArchive } from "@/const/projectArchive";
+import { getCldVideoUrl, getCldImageUrl } from "next-cloudinary";
 
 const ArchiveCard = ({
   item,
   index,
-  total,
 }: {
   item: (typeof projectArchive)[0];
   index: number;
-  total: number;
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isVideo = item.cover?.endsWith(".mp4") || item.cover?.endsWith(".webm");
+
+  const isVideo =
+    item.cover?.endsWith(".mp4") ||
+    item.cover?.endsWith(".webm") ||
+    item.cover?.includes("video");
+
+  const mediaUrl = isVideo
+    ? getCldVideoUrl({
+        src: item.cover,
+        width: 600,
+        height: 1000,
+        format: "auto",
+        quality: "auto",
+        crop: "fill",
+        gravity: "center",
+      })
+    : getCldImageUrl({
+        src: item.cover,
+        width: 600,
+        height: 1000,
+        format: "auto",
+        quality: "auto",
+        crop: "fill",
+      });
 
   const displayId = String(index + 1).padStart(2, "0");
 
   const handleMouseEnter = () => {
     if (isVideo && videoRef.current) {
-      videoRef.current.play();
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
     }
   };
 
@@ -49,35 +74,31 @@ const ArchiveCard = ({
     >
       <Link
         href={"/archive/projects/" + item.slug || "#"}
-        target={"_blank"}
         className="block h-full w-full"
       >
-        {/* --- Media Layer --- */}
         <div className="absolute inset-0 overflow-hidden">
           {isVideo ? (
             <video
               ref={videoRef}
-              src={item.cover}
+              src={mediaUrl}
               muted
               loop
               playsInline
               className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-[0.22,1,0.36,1]"
             />
           ) : (
-            <motion.img
-              src={item.cover}
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={mediaUrl}
               alt={item.title}
               className="w-full h-full object-cover grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700 ease-[0.22,1,0.36,1]"
             />
           )}
 
-          {/* Cinematic Vignette */}
           <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-black/40 opacity-80" />
         </div>
 
-        {/* --- Content Layer --- */}
         <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-10">
-          {/* Top: ID & Tech Markers */}
           <div className="flex justify-between items-start border-b border-white/10 pb-4 group-hover:border-white/30 transition-colors duration-500">
             <span className="font-mono text-4xl md:text-6xl font-bold text-transparent text-stroke-white opacity-30 group-hover:opacity-100 group-hover:text-white transition-all duration-500">
               {displayId}
@@ -87,9 +108,7 @@ const ArchiveCard = ({
             </div>
           </div>
 
-          {/* Bottom: Title & Info */}
           <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-            {/* Active Badge or Category */}
             <div className="flex items-center gap-2 mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
               {item.endDate === "Present" ? (
                 <>
@@ -126,7 +145,6 @@ const ArchiveCard = ({
           </div>
         </div>
 
-        {/* --- Hover Decoration: Scanline --- */}
         <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(to_bottom,transparent_50%,rgba(0,0,0,0.3)_51%)] bg-size-[100%_4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 mix-blend-overlay" />
       </Link>
     </motion.div>
@@ -136,7 +154,6 @@ const ArchiveCard = ({
 const ArchiveGrid = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // --- Sorting Logic ---
   const sortedItems = useMemo(() => {
     return [...projectArchive].sort((a, b) => {
       const aIsActive = a.endDate === "Present";
@@ -147,7 +164,6 @@ const ArchiveGrid = () => {
     });
   }, []);
 
-  // --- MOMENTUM SCROLL LOGIC ---
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -157,18 +173,15 @@ const ArchiveGrid = () => {
     let isAnimating = false;
     let animationFrameId: number;
 
-    // Physics constants
     const ease = 0.08;
     const speed = 1.5;
 
-    // Linear Interpolation
     const lerp = (start: number, end: number, factor: number) =>
       start + (end - start) * factor;
 
     const animate = () => {
       if (!container) return;
 
-      // Calculate difference
       const diff = targetScroll - currentScroll;
 
       if (Math.abs(diff) < 0.5) {
@@ -210,10 +223,8 @@ const ArchiveGrid = () => {
 
   return (
     <section className="relative w-full h-screen bg-black text-white flex flex-col justify-center overflow-hidden">
-      {/* Background Grid Texture */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[100px_100px] pointer-events-none" />
 
-      {/* --- Header Left --- */}
       <div className="absolute top-8 md:top-12 left-6 md:left-12 z-20">
         <h2 className="font-mono text-xs text-neutral-500 tracking-widest mb-1">
           // ARCHIVE_VIEW
@@ -221,7 +232,6 @@ const ArchiveGrid = () => {
         <h1 className="text-xl font-bold tracking-tight">PROJECT_DATABASE</h1>
       </div>
 
-      {/* --- Header Right (Back Button) --- */}
       <div className="absolute top-8 md:top-12 right-6 md:right-12 z-20">
         <Link
           href="/"
@@ -237,19 +247,16 @@ const ArchiveGrid = () => {
         </Link>
       </div>
 
-      {/* Horizontal Scroll Container */}
       <div
         ref={containerRef}
         className="w-full h-auto overflow-x-auto overflow-y-hidden whitespace-nowrap scrollbar-hide px-8 md:px-12 py-10 flex items-center cursor-grab active:cursor-grabbing"
       >
         {sortedItems.map((item, index) => (
-          // REMOVED: snap-center
           <div key={item.slug} className="shrink-0">
-            <ArchiveCard item={item} index={index} total={sortedItems.length} />
+            <ArchiveCard item={item} index={index} />
           </div>
         ))}
 
-        {/* End Card */}
         <div className="shrink-0 h-[65vh] md:h-[75vh] min-w-[200px] flex flex-col items-center justify-center border-l border-neutral-800 ml-8 text-neutral-600">
           <div className="rotate-90 font-mono text-xs tracking-widest whitespace-nowrap">
             END OF RECORD
@@ -257,7 +264,6 @@ const ArchiveGrid = () => {
         </div>
       </div>
 
-      {/* Scroll Progress Indicator */}
       <div className="absolute bottom-12 left-12 right-12 h-px bg-neutral-900 hidden md:block">
         <div className="absolute top-0 left-0 h-full w-24 bg-green-900/50" />
       </div>

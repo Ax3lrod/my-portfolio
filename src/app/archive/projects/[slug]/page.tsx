@@ -1,12 +1,13 @@
 "use client";
 
-import React, { use } from "react";
+import { use, useRef } from "react";
 import { projectArchive } from "@/const/projectArchive";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Github, Globe } from "lucide-react";
 import { motion, useScroll } from "motion/react";
-import Image from "next/image";
+import Image from "@/components/Image";
+import { getCldVideoUrl } from "next-cloudinary";
 
 const ScrollProgress = () => {
   const { scrollYProgress } = useScroll();
@@ -36,7 +37,18 @@ export default function ProjectDetail({
   }
 
   const isVideo =
-    project.cover?.endsWith(".mp4") || project.cover?.endsWith(".webm");
+    project.cover?.endsWith(".mp4") ||
+    project.cover?.endsWith(".webm") ||
+    project.cover?.includes("video");
+
+  const videoUrl = isVideo
+    ? getCldVideoUrl({
+        src: project.cover,
+        width: 1920,
+        format: "auto",
+        quality: "auto",
+      })
+    : "";
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-green-500/30 selection:text-green-200">
@@ -106,7 +118,7 @@ export default function ProjectDetail({
         >
           {isVideo ? (
             <video
-              src={project.cover}
+              src={videoUrl}
               autoPlay
               muted
               loop
