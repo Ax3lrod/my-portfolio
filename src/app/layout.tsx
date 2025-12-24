@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { ReactLenis } from "lenis/react";
 import { LedFont } from "@/lib/font";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL || "https://aryasatya.vercel.app";
 
 const GOOGLE_VERIFICATION = process.env.GOOGLE_VERIFICATION || "";
+
+const GA_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS || "";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -74,7 +77,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ReactLenis root />
-      <body className={`${LedFont.variable} antialiased`}>{children}</body>
+      <body className={`${LedFont.variable} antialiased`}>
+        {children}
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
+      </body>
     </html>
   );
 }
