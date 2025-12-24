@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useRef } from "react";
+import { use } from "react";
 import { projectArchive } from "@/const/projectArchive";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -8,6 +8,38 @@ import { ArrowLeft, ArrowUpRight, Github, Globe } from "lucide-react";
 import { motion, useScroll } from "motion/react";
 import Image from "@/components/Image";
 import { getCldVideoUrl } from "next-cloudinary";
+import { Metadata } from "next";
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const project = projectArchive.find((p) => p.slug === slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found",
+    };
+  }
+
+  return {
+    title: project.title,
+    description: project.subtitle || project.description.slice(0, 150),
+    openGraph: {
+      title: project.title,
+      description: project.subtitle,
+      images: [
+        {
+          url: typeof project.cover === "string" ? project.cover : "",
+          width: 1200,
+          height: 630,
+        },
+      ],
+    },
+  };
+}
 
 const ScrollProgress = () => {
   const { scrollYProgress } = useScroll();
@@ -19,11 +51,7 @@ const ScrollProgress = () => {
   );
 };
 
-export default function ProjectDetail({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default function ProjectDetail({ params }: Props) {
   const { slug } = use(params);
 
   const project = projectArchive.find((p) => p.slug === slug);
