@@ -1,5 +1,3 @@
-"use client";
-
 import { use } from "react";
 import { projectArchive } from "@/const/projectArchive";
 import { notFound } from "next/navigation";
