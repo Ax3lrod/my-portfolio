@@ -75,7 +75,7 @@ const ProjectCard = ({
         href={`/archive/projects/${project.slug}`}
         className="block w-full h-full"
       >
-        <div className="relative w-full h-auto overflow-hidden bg-neutral-900 border border-neutral-800 group-hover:border-neutral-700 transition-colors rounded-sm">
+        <div className="relative w-full aspect-video overflow-hidden bg-neutral-900 border border-neutral-800 group-hover:border-neutral-700 transition-colors rounded-sm">
           {/* Badge Active / Present */}
           {project.endDate === "Present" && (
             <div className="absolute top-2 left-2 z-30 bg-green-500/20 backdrop-blur-md border border-green-500/30 px-2 py-1 rounded text-[10px] font-mono text-green-400 flex items-center gap-2">
@@ -93,7 +93,7 @@ const ProjectCard = ({
               muted
               loop
               playsInline
-              className="w-full h-auto block grayscale group-hover:grayscale-0 transition-all duration-700 ease-[0.16,1,0.3,1] scale-100 group-hover:scale-105"
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-[0.16,1,0.3,1] scale-100 group-hover:scale-105"
             />
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
@@ -102,7 +102,7 @@ const ProjectCard = ({
               alt={project.title}
               width={640}
               height={360}
-              className="w-full h-auto block grayscale group-hover:grayscale-0 transition-all duration-700 ease-[0.16,1,0.3,1] scale-100 group-hover:scale-105"
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-[0.16,1,0.3,1] scale-100 group-hover:scale-105"
             />
           )}
 
@@ -115,7 +115,7 @@ const ProjectCard = ({
 
         <div className="flex justify-between items-start mt-3 px-1">
           <div className="max-w-[85%]">
-            <h3 className="text-sm md:text-base font-display font-bold tracking-tight text-neutral-300 group-hover:text-white transition-colors leading-tight">
+            <h3 className="text-sm md:text-base font-display font-bold tracking-tight text-neutral-300 group-hover:text-white transition-colors leading-tight line-clamp-1">
               {project.title}
             </h3>
             <span className="text-[10px] md:text-xs font-mono text-neutral-500 mt-1 block group-hover:text-green-400 transition-colors truncate">
@@ -205,7 +205,7 @@ const ProjectCatalog = () => {
 
           {/* CTA Link */}
           <Link href="/archive" className="block mt-0 mb-8">
-            <div className="h-55 flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">
+            <div className="aspect-video flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">
               <div className="text-center">
                 <p className="text-neutral-500 font-mono text-[10px] mb-2">
                   FULL DATABASE
@@ -221,7 +221,7 @@ const ProjectCatalog = () => {
         {/* Mobile CTA */}
         <div className="block lg:hidden mt-4">
           <Link href="/archive">
-            <div className="h-37.5 flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">
+            <div className="aspect-video flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">
               <div className="text-center">
                 <p className="text-neutral-500 font-mono text-[10px] mb-2">
                   FULL DATABASE
