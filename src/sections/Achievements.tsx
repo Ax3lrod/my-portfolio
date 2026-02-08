@@ -224,7 +224,7 @@ const Achievements = () => {
       </div>
 
       {/* Section Header */}
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 mb-16 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
+      <div className="relative z-10 max-w-400 mx-auto px-6 md:px-12 mb-16 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
         <div>
           <h2 className="font-mono text-xs text-green-500 mb-2 tracking-widest">
             // HALL_OF_FAME
@@ -245,7 +245,7 @@ const Achievements = () => {
       </div>
 
       {/* Achievements List */}
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12">
+      <div className="relative z-10 max-w-400 mx-auto px-6 md:px-12">
         <div className="flex flex-col gap-8 md:gap-12 pb-20">
           {achievmentArchive.map((item, index) => (
             <AchievementCard

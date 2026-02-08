@@ -69,7 +69,7 @@ export default function ProjectDetail({
       </nav>
 
       {/* --- HERO SECTION --- */}
-      <header className="relative pt-32 pb-12 px-6 md:px-12 max-w-[1800px] mx-auto">
+      <header className="relative pt-32 pb-12 px-6 md:px-12 max-w-450 mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -133,7 +133,7 @@ export default function ProjectDetail({
       </section>
 
       {/* --- GRID INFO & CONTENT --- */}
-      <section className="max-w-[1800px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-32">
+      <section className="max-w-450 mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-32">
         {/* LEFT COLUMN: SPECS */}
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32 space-y-8">
@@ -240,7 +240,7 @@ export default function ProjectDetail({
       >
         <div className="absolute inset-0 bg-neutral-900 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
 
-        <div className="relative max-w-[1800px] mx-auto px-6 md:px-12 py-24 flex flex-col md:flex-row justify-between items-end gap-8">
+        <div className="relative max-w-450 mx-auto px-6 md:px-12 py-24 flex flex-col md:flex-row justify-between items-end gap-8">
           <div>
             <span className="font-mono text-xs text-neutral-500 mb-4 block group-hover:text-green-400 transition-colors">
               NEXT PROJECT

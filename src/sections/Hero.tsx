@@ -18,7 +18,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-10 pointer-events-none bg-radial-gradient(circle at center, transparent 50%, black 120%)" />
 
       {/* --- LAYER 3: Content Grid --- */}
-      <div className="relative z-20 w-full h-full flex flex-col justify-between p-6 md:p-12 max-w-[1600px] mx-auto">
+      <div className="relative z-20 w-full h-full flex flex-col justify-between p-6 md:p-12 max-w-400 mx-auto">
         {/* Header Row */}
         <header className="flex justify-between items-start">
           <motion.div
@@ -73,7 +73,7 @@ const Hero = () => {
 
           {/* Description Block */}
           <motion.div
-            className="md:w-[300px] space-y-6"
+            className="md:w-75 space-y-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}

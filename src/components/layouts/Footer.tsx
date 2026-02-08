@@ -38,7 +38,7 @@ const Footer = () => {
   return (
     <footer className="relative w-full bg-neutral-950 text-white pt-20 overflow-hidden border-t border-neutral-900">
       {/* --- CONTENT GRID --- */}
-      <div className="max-w-[1800px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-24">
+      <div className="max-w-450 mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-24">
         {/* Col 1: Brand / Newsletter */}
         <div className="md:col-span-5 flex flex-col justify-between h-full">
           <div>

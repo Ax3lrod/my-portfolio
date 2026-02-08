@@ -28,7 +28,7 @@ const Profile = () => {
         </h1>
       </div>
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
+      <div className="relative z-10 max-w-400 mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
         {/* --- LEFT COL: PHOTO (4 Cols) --- */}
         <motion.div
           className="lg:col-span-5 relative"

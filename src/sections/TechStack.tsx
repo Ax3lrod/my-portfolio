@@ -53,7 +53,7 @@ const TechStack = () => {
   return (
     <section className="relative w-full bg-black text-white pt-10 overflow-hidden">
       {/* --- HEADER --- */}
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 mb-6 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
+      <div className="relative z-10 max-w-400 mx-auto px-6 md:px-12 mb-6 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
         <div>
           <h2 className="font-mono text-xs text-green-500 mb-2 tracking-widest">
             // TECHNICAL_COMPETENCE
@@ -94,7 +94,7 @@ const TechStack = () => {
       </div>
 
       {/* --- GRID CATEGORIES --- */}
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="relative z-10 max-w-400 mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {CATEGORIES.map((cat, idx) => (
           <div
             key={cat.id}

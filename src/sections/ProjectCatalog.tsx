@@ -165,7 +165,7 @@ const ProjectCatalog = () => {
 
   return (
     <section className="relative w-full min-h-screen bg-black text-white pt-20 z-30">
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 mb-16 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
+      <div className="relative z-10 max-w-400 mx-auto px-6 md:px-12 mb-16 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
         <div>
           <h2 className="font-mono text-xs text-green-500 mb-2 tracking-widest">
             // ARCHIVE_PREVIEW
@@ -182,7 +182,7 @@ const ProjectCatalog = () => {
       </div>
 
       {/* Grid Container */}
-      <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 px-6 md:px-12 lg:grid-cols-3 gap-6 md:gap-8 items-start">
+      <div className="max-w-400 mx-auto grid grid-cols-1 md:grid-cols-2 px-6 md:px-12 lg:grid-cols-3 gap-6 md:gap-8 items-start">
         {/* COLUMN 1 */}
         <div className="flex flex-col">
           {col1.map((project, idx) => (
@@ -205,7 +205,7 @@ const ProjectCatalog = () => {
 
           {/* CTA Link */}
           <Link href="/archive" className="block mt-0 mb-8">
-            <div className="h-[220px] flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">
+            <div className="h-55 flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">
               <div className="text-center">
                 <p className="text-neutral-500 font-mono text-[10px] mb-2">
                   FULL DATABASE
@@ -221,7 +221,7 @@ const ProjectCatalog = () => {
         {/* Mobile CTA */}
         <div className="block lg:hidden mt-4">
           <Link href="/archive">
-            <div className="h-[150px] flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">
+            <div className="h-37.5 flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">
               <div className="text-center">
                 <p className="text-neutral-500 font-mono text-[10px] mb-2">
                   FULL DATABASE

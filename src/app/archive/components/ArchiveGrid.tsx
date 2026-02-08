@@ -70,7 +70,7 @@ const ArchiveCard = ({
       }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group relative h-[65vh] md:h-[75vh] min-w-[300px] md:min-w-[450px] shrink-0 cursor-pointer overflow-hidden border border-neutral-800 bg-neutral-900 mx-2 md:mx-4 first:ml-0 last:mr-0"
+      className="group relative h-[65vh] md:h-[75vh] min-w-75 md:min-w-112.5 shrink-0 cursor-pointer overflow-hidden border border-neutral-800 bg-neutral-900 mx-2 md:mx-4 first:ml-0 last:mr-0"
     >
       <Link
         href={"/archive/projects/" + item.slug || "#"}
@@ -129,7 +129,7 @@ const ArchiveCard = ({
             </h3>
 
             <div className="flex justify-between items-end border-t border-white/20 pt-4">
-              <span className="font-mono text-xs text-neutral-400 group-hover:text-white transition-colors truncate max-w-[200px]">
+              <span className="font-mono text-xs text-neutral-400 group-hover:text-white transition-colors truncate max-w-50">
                 {item.subtitle}
               </span>
               <div className="flex items-center gap-2">
@@ -257,7 +257,7 @@ const ArchiveGrid = () => {
           </div>
         ))}
 
-        <div className="shrink-0 h-[65vh] md:h-[75vh] min-w-[200px] flex flex-col items-center justify-center border-l border-neutral-800 ml-8 text-neutral-600">
+        <div className="shrink-0 h-[65vh] md:h-[75vh] min-w-50 flex flex-col items-center justify-center border-l border-neutral-800 ml-8 text-neutral-600">
           <div className="rotate-90 font-mono text-xs tracking-widest whitespace-nowrap">
             END OF RECORD
           </div>
