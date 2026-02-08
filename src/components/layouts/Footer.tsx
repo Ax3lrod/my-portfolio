@@ -39,30 +39,29 @@ const Footer = () => {
     <footer className="relative w-full bg-neutral-950 text-white pt-20 overflow-hidden border-t border-neutral-900">
       {/* --- CONTENT GRID --- */}
       <div className="max-w-450 mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-24">
-        {/* Col 1: Brand / Newsletter */}
+        {/* Col 1: Brand / Connect */}
         <div className="md:col-span-5 flex flex-col justify-between h-full">
           <div>
             <h3 className="font-mono text-xs text-neutral-500 mb-6 tracking-widest uppercase">
-              // Stay Updated
+              // CONNECT
             </h3>
             <p className="text-xl md:text-2xl font-light leading-relaxed mb-8 text-neutral-300 max-w-md">
-              Join the network. Get updates on new drops, experiments, and
-              visual essays.
+              Open for new opportunities, creative collaborations, or just a
+              friendly technical discussion.
             </p>
 
-            <form className="flex gap-0 border-b border-neutral-700 pb-2 max-w-sm group focus-within:border-green-500 transition-colors">
-              <input
-                type="email"
-                placeholder="ENTER_EMAIL_ADDRESS"
-                className="bg-transparent w-full outline-none font-mono text-sm placeholder:text-neutral-600 text-green-400"
+            <a
+              href="mailto:aryasatyaalaauddin@gmail.com"
+              className="inline-flex items-center gap-4 group border-b border-neutral-700 pb-1 hover:border-green-500 transition-colors"
+            >
+              <span className="font-mono text-sm text-neutral-400 group-hover:text-green-400 transition-colors uppercase tracking-widest">
+                SEND_MESSAGE
+              </span>
+              <ArrowUpRight
+                size={18}
+                className="text-neutral-600 group-hover:text-green-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
               />
-              <button
-                type="submit"
-                className="text-neutral-500 hover:text-white transition-colors"
-              >
-                <ArrowUpRight size={20} />
-              </button>
-            </form>
+            </a>
           </div>
 
           <div className="hidden md:block mt-12">
@@ -164,7 +163,7 @@ const Footer = () => {
           <h1 className="text-[14vw] md:text-[16.5vw] font-display font-bold tracking-tighter text-neutral-900 text-center group-hover:text-neutral-800 transition-colors duration-700">
             ARYASATYA
             <span className="text-neutral-800 group-hover:text-neutral-700">
-              .CV
+              ALAAUDDIN
             </span>
           </h1>
         </div>
