@@ -1,15 +1,16 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import {
-  AnimatePresence,
-  animate,
   motion,
+  AnimatePresence,
   useMotionValue,
   useTransform,
+  animate,
 } from "motion/react";
-import React, { useEffect, useState } from "react";
 
 // --- Static Configuration ---
+// Strips of numbers for the odometer effect
 const STRIP_ONES = Array.from({ length: 101 }, (_, i) => i % 10).reverse();
 const STRIP_TENS = Array.from({ length: 11 }, (_, i) => i % 10).reverse();
 
@@ -19,13 +20,14 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
 
   const countMotion = useMotionValue(0);
 
+  // Smooth continuous transform for ones
   const onesY = useTransform(countMotion, (latest) => {
-    const val = Math.round(latest);
-    return `-${100 - val}em`;
+    return `-${100 - latest}em`;
   });
 
+  // Smooth continuous transform for tens
   const tensY = useTransform(countMotion, (latest) => {
-    const val = Math.floor(latest / 10);
+    const val = latest / 10;
     return `-${10 - val}em`;
   });
 
@@ -57,7 +59,7 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
           exit={{ y: "-100%" }}
           transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1] }}
         >
-          {/* Background Textures (Static) */}
+          {/* Background Textures (Original) */}
           <div className="absolute inset-0 pointer-events-none z-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] brightness-100 contrast-150" />
           <div className="absolute inset-0 pointer-events-none z-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-size-[100%_3px,6px_100%]" />
 
@@ -95,7 +97,7 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
                 {!isComplete ? (
                   <motion.div
                     className="absolute left-0 right-0 flex flex-col items-center"
-                    style={{ y: tensY }} // Direct GPU binding
+                    style={{ y: tensY }}
                   >
                     {STRIP_TENS.map((n, i) => (
                       <div
@@ -123,12 +125,12 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
                 )}
               </div>
 
-              {/* 3. ONES COLUMN (The Long Strip) */}
+              {/* 3. ONES COLUMN */}
               <div className="relative w-[1.2ch] h-[1em] overflow-hidden flex justify-center">
                 {!isComplete ? (
                   <motion.div
                     className="absolute left-0 right-0 flex flex-col items-center"
-                    style={{ y: onesY }} // Direct GPU binding
+                    style={{ y: onesY }}
                   >
                     {STRIP_ONES.map((n, i) => (
                       <div
