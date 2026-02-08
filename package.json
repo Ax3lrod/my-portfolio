@@ -13,6 +13,9 @@
     "@fontsource/unbounded": "^5.2.8",
     "@next/third-parties": "^16.1.1",
     "@proj-airi/font-departure-mono": "^0.8.4",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.5.0",
+    "@types/three": "^0.182.0",
     "cloudinary": "^2.8.0",
     "commander": "^14.0.2",
     "dotenv": "^17.2.3",
@@ -25,7 +28,8 @@
     "next": "^16.1.1",
     "next-cloudinary": "^6.17.5",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "three": "^0.182.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",

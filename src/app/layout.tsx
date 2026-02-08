@@ -4,6 +4,7 @@ import { LedFont } from "@/lib/font";
 import { Unbounded } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import CustomCursor from "@/components/CustomCursor";
 import "./globals.css";
 
 const unbounded = Unbounded({
@@ -87,6 +88,7 @@ export default function RootLayout({
       <body
         className={`${LedFont.variable} ${unbounded.variable} ${GeistSans.variable} antialiased`}
       >
+        <CustomCursor />
         {children}
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
       </body>

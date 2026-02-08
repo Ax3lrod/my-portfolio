@@ -3,15 +3,14 @@
 import { ArrowUpRight, MessageSquare } from "lucide-react";
 import { motion } from "motion/react";
 import GlitchText from "@/components/GlitchText";
+import HologramCanvas from "@/components/3d/HolographicObject";
 
 const CTA = () => {
   return (
     <section id="contact" className="relative w-full bg-black py-24 md:py-40 overflow-hidden border-t border-neutral-900">
-      {/* Background Decoration */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none flex items-center justify-center">
-        <span className="text-[40vw] font-bold leading-none select-none">
-          CONTACT
-        </span>
+      {/* Background Decoration (Hologram) */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-screen hidden md:block">
+        <HologramCanvas />
       </div>
 
       <div className="relative z-10 max-w-400 mx-auto px-6 md:px-12">

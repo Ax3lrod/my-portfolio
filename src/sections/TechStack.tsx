@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { Cpu, Terminal, Layers, Database } from "lucide-react";
 import GlitchText from "@/components/GlitchText";
+import { CornerBracket } from "@/components/CyberAssets";
 
 const STACK_MARQUEE = [
   "NEXT.JS",
@@ -132,8 +133,19 @@ const TechStack = () => {
               ))}
             </ul>
 
-            {/* Corner Decoration */}
-            <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-neutral-700 group-hover:border-green-500 transition-colors" />
+            {/* Corner Decorations (Visible on Hover) */}
+            <div className="absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+               <CornerBracket size={12} className="text-green-500" />
+            </div>
+            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+               <CornerBracket size={12} className="text-green-500" flipX />
+            </div>
+            <div className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+               <CornerBracket size={12} className="text-green-500" flipY />
+            </div>
+            <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+               <CornerBracket size={12} className="text-green-500" flipX flipY />
+            </div>
           </div>
         ))}
       </div>

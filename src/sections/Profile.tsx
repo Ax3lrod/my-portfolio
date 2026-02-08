@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import Image from "@/components/Image";
 import GlitchText from "@/components/GlitchText";
+import { CornerBracket, HudScopeTwo } from "@/components/CyberAssets";
+import { ArwesFrame } from "@/components/ArwesFrame";
 
 const Profile = () => {
   const ref = useRef(null);
@@ -47,12 +49,21 @@ const Profile = () => {
             />
 
             {/* Overlay UI Elements (HUD) */}
-            <div className="absolute inset-0 border border-white/10 m-4 pointer-events-none">
-              <div className="absolute top-0 left-0 w-2 h-2 border-l border-t border-white" />
-              <div className="absolute top-0 right-0 w-2 h-2 border-r border-t border-white" />
-              <div className="absolute bottom-0 left-0 w-2 h-2 border-l border-b border-white" />
-              <div className="absolute bottom-0 right-0 w-2 h-2 border-r border-b border-white" />
+            <div className="absolute inset-0 m-2 pointer-events-none text-white/50">
+              <CornerBracket className="absolute top-0 left-0" />
+              <CornerBracket className="absolute top-0 right-0" flipX />
+              <CornerBracket className="absolute bottom-0 left-0" flipY />
+              <CornerBracket className="absolute bottom-0 right-0" flipX flipY />
             </div>
+
+            {/* Rotating Scanning Scope */}
+            <motion.div
+              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            >
+              <HudScopeTwo size="80%" className="text-green-500" />
+            </motion.div>
           </div>
 
           {/* Decorative Background box */}
@@ -84,98 +95,106 @@ const Profile = () => {
 
           {/* Info Grid */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             {/* Block 1: Education */}
-            <div className="p-6 border border-neutral-800 bg-neutral-900/20 hover:bg-neutral-900/50 transition-colors group">
-              <div className="flex items-start justify-between mb-4">
-                <GraduationCap
-                  size={20}
-                  className="text-neutral-500 group-hover:text-white transition-colors"
-                />
-                <span className="font-mono text-[10px] text-neutral-600">
-                  EDUCATION
-                </span>
-              </div>
-              <h4 className="text-lg font-bold text-white">ITS Surabaya</h4>
-              <p className="text-sm text-neutral-400">
-                Bachelor of Computer Science
-              </p>
-              <p className="text-xs font-mono text-green-500 mt-2">
-                GPA: 3.74 / 4.00
-              </p>
-            </div>
-
-            {/* Block 2: Location */}
-            <div className="p-6 border border-neutral-800 bg-neutral-900/20 hover:bg-neutral-900/50 transition-colors group">
-              <div className="flex items-start justify-between mb-4">
-                <MapPin
-                  size={20}
-                  className="text-neutral-500 group-hover:text-white transition-colors"
-                />
-                <span className="font-mono text-[10px] text-neutral-600">
-                  BASE_LOC
-                </span>
-              </div>
-              <h4 className="text-lg font-bold text-white">
-                Surabaya, Indonesia
-              </h4>
-              <p className="text-sm text-neutral-400">
-                Available for Remote Work
-              </p>
-              <p className="text-xs font-mono text-neutral-500 mt-2">GMT+7</p>
-            </div>
-
-            {/* Block 3: Contact */}
-            <a
-              href="mailto:aryasatyagigachad9@gmail.com"
-              className="p-6 border border-neutral-800 bg-neutral-900/20 hover:bg-neutral-900/50 transition-colors group cursor-pointer"
-            >
-              <div className="flex items-start justify-between mb-4">
-                <Mail
-                  size={20}
-                  className="text-neutral-500 group-hover:text-white transition-colors"
-                />
-                <span className="font-mono text-[10px] text-neutral-600">
-                  COMM_LINK
-                </span>
-              </div>
-              <h4 className="text-lg font-bold text-white group-hover:underline decoration-green-500 underline-offset-4 decoration-2">
-                aryasatyagigachad9@gmail.com
-              </h4>
-              <div className="flex items-center gap-2 mt-2 text-xs font-mono text-neutral-500 group-hover:text-green-400 transition-colors">
-                <span>SEND MESSAGE</span>
-                <ArrowUpRight size={12} />
-              </div>
-            </a>
-
-            {/* Block 4: Resume */}
-            <a
-              href="/cv/ARYASATYA_ALAAUDDIN_CV.pdf"
-              target="_blank"
-              className="p-6 border border-neutral-800 bg-neutral-900/20 hover:bg-green-900/10 hover:border-green-500/50 transition-colors group cursor-pointer flex flex-col justify-between"
-            >
-              <div className="flex items-start justify-between mb-2">
-                <Download
-                  size={20}
-                  className="text-neutral-500 group-hover:text-green-400 transition-colors"
-                />
-                <span className="font-mono text-[10px] text-neutral-600 group-hover:text-green-500">
-                  DATABASE
-                </span>
-              </div>
-              <div>
-                <h4 className="text-lg font-bold text-white group-hover:text-green-400 transition-colors">
-                  Download CV
-                </h4>
-                <p className="text-xs font-mono text-neutral-500 mt-1">
-                  .PDF FORMAT
+            <ArwesFrame className="h-full">
+              <div className="p-6 transition-colors group">
+                <div className="flex items-start justify-between mb-4">
+                  <GraduationCap
+                    size={20}
+                    className="text-neutral-500 group-hover:text-white transition-colors"
+                  />
+                  <span className="font-mono text-[10px] text-neutral-600">
+                    EDUCATION
+                  </span>
+                </div>
+                <h4 className="text-lg font-bold text-white">ITS Surabaya</h4>
+                <p className="text-sm text-neutral-400">
+                  Bachelor of Computer Science
+                </p>
+                <p className="text-xs font-mono text-green-500 mt-2">
+                  GPA: 3.74 / 4.00
                 </p>
               </div>
-            </a>
+            </ArwesFrame>
+
+            {/* Block 2: Location */}
+            <ArwesFrame>
+              <div className="p-6 transition-colors group">
+                <div className="flex items-start justify-between mb-4">
+                  <MapPin
+                    size={20}
+                    className="text-neutral-500 group-hover:text-white transition-colors"
+                  />
+                  <span className="font-mono text-[10px] text-neutral-600">
+                    BASE_LOC
+                  </span>
+                </div>
+                <h4 className="text-lg font-bold text-white">
+                  Surabaya, Indonesia
+                </h4>
+                <p className="text-sm text-neutral-400">
+                  Available for Remote Work
+                </p>
+                <p className="text-xs font-mono text-neutral-500 mt-2">GMT+7</p>
+              </div>
+            </ArwesFrame>
+
+            {/* Block 3: Contact */}
+            <ArwesFrame>
+              <a
+                href="mailto:aryasatyaalaauddin@gmail.com"
+                className="p-6 block transition-colors group cursor-pointer"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <Mail
+                    size={20}
+                    className="text-neutral-500 group-hover:text-white transition-colors"
+                  />
+                  <span className="font-mono text-[10px] text-neutral-600">
+                    COMM_LINK
+                  </span>
+                </div>
+                <h4 className="text-lg font-bold text-white group-hover:underline decoration-green-500 underline-offset-4 decoration-2">
+                  aryasatyaalaauddin@gmail.com
+                </h4>
+                <div className="flex items-center gap-2 mt-2 text-xs font-mono text-neutral-500 group-hover:text-green-400 transition-colors">
+                  <span>SEND MESSAGE</span>
+                  <ArrowUpRight size={12} />
+                </div>
+              </a>
+            </ArwesFrame>
+
+            {/* Block 4: Resume */}
+            <ArwesFrame color="#1bc7fb">
+              <a
+                href="/cv/ARYASATYA_ALAAUDDIN_CV.pdf"
+                target="_blank"
+                className="p-6 transition-colors group cursor-pointer flex flex-col justify-between"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <Download
+                    size={20}
+                    className="text-neutral-500 group-hover:text-cyan-400 transition-colors"
+                  />
+                  <span className="font-mono text-[10px] text-neutral-600 group-hover:text-cyan-500">
+                    DATABASE
+                  </span>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+                    Download CV
+                  </h4>
+                  <p className="text-xs font-mono text-neutral-500 mt-1">
+                    .PDF FORMAT
+                  </p>
+                </div>
+              </a>
+            </ArwesFrame>
           </motion.div>
         </div>
       </div>
@@ -183,4 +202,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Profile

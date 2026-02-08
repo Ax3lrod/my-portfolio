@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { ArrowDownRight, Globe, Cpu } from "lucide-react";
 import AsciiMediaRenderer from "@/components/AsciiMediaRenderer";
 import GlitchText from "@/components/GlitchText";
+import { HudScopeThree, HudFrameDiamond } from "@/components/CyberAssets";
 
 const Hero = () => {
   return (
@@ -19,6 +20,15 @@ const Hero = () => {
 
       {/* --- LAYER 3: Content Grid --- */}
       <div className="relative z-20 w-full h-full flex flex-col justify-between p-6 md:p-12 max-w-400 mx-auto">
+        {/* Decorative HUD Scope */}
+        <motion.div
+          className="absolute bottom-24 right-10 opacity-20 hidden md:block pointer-events-none"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        >
+          <HudScopeThree size={160} className="text-neutral-500" />
+        </motion.div>
+
         {/* Header Row */}
         <header className="flex justify-between items-start">
           <motion.div
@@ -41,7 +51,7 @@ const Hero = () => {
             className="hidden md:flex gap-8 text-xs font-mono tracking-wide"
           >
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <HudFrameDiamond size={14} className="text-green-500 animate-pulse" />
               SYSTEM ONLINE
             </div>
             <div className="flex items-center gap-2 text-neutral-400">

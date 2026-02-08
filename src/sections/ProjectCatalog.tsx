@@ -8,6 +8,7 @@ import Link from "next/link";
 import { projectArchive } from "@/const/projectArchive";
 import GlitchText from "@/components/GlitchText";
 import { getCldVideoUrl } from "next-cloudinary";
+import { CornerBracket, HudFrameDiamond } from "@/components/CyberAssets";
 
 const SELECTED_SLUGS = [
   "sre-its-official",
@@ -76,6 +77,14 @@ const ProjectCard = ({
         className="block w-full h-full"
       >
         <div className="relative w-full aspect-video overflow-hidden bg-neutral-900 border border-neutral-800 group-hover:border-neutral-700 transition-colors rounded-sm">
+          {/* Decorative Brackets */}
+          <div className="absolute top-2 left-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+             <CornerBracket className="text-green-500" size={16} strokeWidth={2} />
+          </div>
+          <div className="absolute bottom-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+             <CornerBracket className="text-green-500" size={16} strokeWidth={2} flipX flipY />
+          </div>
+
           {/* Badge Active / Present */}
           {project.endDate === "Present" && (
             <div className="absolute top-2 left-2 z-30 bg-green-500/20 backdrop-blur-md border border-green-500/30 px-2 py-1 rounded text-[10px] font-mono text-green-400 flex items-center gap-2">
