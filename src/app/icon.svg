@@ -1,0 +1,18 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" rx="4" fill="black"/>
+  
+  <!-- Outer HUD Brackets -->
+  <path d="M2 8V2H8" stroke="#22c55e" stroke-width="1.5"/>
+  <path d="M24 2H30V8" stroke="#22c55e" stroke-width="1.5"/>
+  <path d="M30 24V30H24" stroke="#22c55e" stroke-width="1.5"/>
+  <path d="M2 24V30H8" stroke="#22c55e" stroke-width="1.5"/>
+  
+  <!-- Stylized "A" (Geometric/Futuristic) -->
+  <path d="M9 22L16 6L23 22" stroke="#22c55e" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="bevel"/>
+  <path d="M12 17H20" stroke="#22c55e" stroke-width="2.5" stroke-linecap="square"/>
+  
+  <!-- Decorative Tech Dot -->
+  <rect x="15" y="11" width="2" height="2" fill="#22c55e" opacity="0.5">
+    <animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite" />
+  </rect>
+</svg>
