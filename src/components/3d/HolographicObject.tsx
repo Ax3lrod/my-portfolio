@@ -25,7 +25,7 @@ const RotatingGeo = () => {
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
       <mesh ref={meshRef} scale={1.8}>
-        <icosahedronGeometry args={[1, 1]} />
+        <icosahedronGeometry args={[1, 0]} /> 
         {/* Wireframe Material for Holographic look */}
         <meshBasicMaterial
           color="#22c55e" // green-500
@@ -36,7 +36,7 @@ const RotatingGeo = () => {
       </mesh>
       {/* Inner solid core for depth */}
       <mesh scale={1.75}>
-         <icosahedronGeometry args={[1, 1]} />
+         <icosahedronGeometry args={[1, 0]} />
          <meshBasicMaterial
             color="#22c55e"
             transparent={true}
@@ -55,7 +55,7 @@ interface HologramCanvasProps {
 export const HologramCanvas = ({ className = "" }: HologramCanvasProps) => {
   return (
     <div className={`relative w-full h-full ${className}`}>
-      <Canvas>
+      <Canvas dpr={[1, 2]}> 
         <PerspectiveCamera makeDefault position={[0, 0, 5]} />
         <ambientLight intensity={0.5} />
         
@@ -63,7 +63,7 @@ export const HologramCanvas = ({ className = "" }: HologramCanvasProps) => {
         <Stars 
           radius={50} 
           depth={50} 
-          count={2000} 
+          count={500} 
           factor={4} 
           saturation={0} 
           fade 

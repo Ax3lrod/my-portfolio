@@ -5,9 +5,18 @@ import { motion, useMotionValue, useSpring } from "motion/react";
 
 const CustomCursor = () => {
   const [isActive, setIsActive] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  
   // Using motion values for high-performance updates without re-renders
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+
+  useEffect(() => {
+    // Check if device is touch-enabled
+    if (typeof window !== "undefined") {
+      setIsTouchDevice(window.matchMedia("(pointer: coarse)").matches);
+    }
+  }, []);
 
   // Smooth spring physics for the cursor movement
   const springConfig = { damping: 40, stiffness: 400, mass: 0.5 };
@@ -15,6 +24,8 @@ const CustomCursor = () => {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    if (isTouchDevice) return; // Don't attach listeners on touch devices
+
     const moveCursor = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -43,7 +54,9 @@ const CustomCursor = () => {
       window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, [mouseX, mouseY]);
+  }, [mouseX, mouseY, isTouchDevice]);
+
+  if (isTouchDevice) return null;
 
   return (
     <>

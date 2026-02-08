@@ -55,15 +55,6 @@ const Profile = () => {
               <CornerBracket className="absolute bottom-0 left-0" flipY />
               <CornerBracket className="absolute bottom-0 right-0" flipX flipY />
             </div>
-
-            {/* Rotating Scanning Scope */}
-            <motion.div
-              className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            >
-              <HudScopeTwo size="80%" className="text-green-500" />
-            </motion.div>
           </div>
 
           {/* Decorative Background box */}
@@ -117,7 +108,7 @@ const Profile = () => {
                   Bachelor of Computer Science
                 </p>
                 <p className="text-xs font-mono text-green-500 mt-2">
-                  GPA: 3.74 / 4.00
+                  GPA: 3.80 / 4.00
                 </p>
               </div>
             </ArwesFrame>
