@@ -101,7 +101,7 @@ async function uploadFile(filePath, options = {}) {
     const publicId = generatePublicId(
       filePath,
       baseFolder,
-      customFolder || folder
+      customFolder || folder,
     );
 
     const ext = path.extname(filePath).toLowerCase();
@@ -124,7 +124,7 @@ async function uploadFile(filePath, options = {}) {
     });
 
     console.log(
-      `✅ Success: ${result.public_id} (${Math.round(result.bytes / 1024)}KB)`
+      `✅ Success: ${result.public_id} (${Math.round(result.bytes / 1024)}KB)`,
     );
     return result;
   } catch (error) {
@@ -225,7 +225,7 @@ async function handleMultiple(files, options) {
 async function handleFolder(folderPath, options) {
   const { recursive = false } = options;
   console.log(
-    `📂 Scanning folder: ${folderPath}${recursive ? " (recursive)" : ""}`
+    `📂 Scanning folder: ${folderPath}${recursive ? " (recursive)" : ""}`,
   );
 
   const files = getImageFiles(folderPath, recursive);
@@ -257,7 +257,7 @@ program
   .option(
     "-q, --quality <quality>",
     "Image quality (auto, 100, 80, etc.)",
-    "auto"
+    "auto",
   )
   .option("--no-overwrite", "Don't overwrite existing files")
   .action(async (file, options) => {
@@ -272,7 +272,7 @@ program
   .option(
     "-q, --quality <quality>",
     "Image quality (auto, 100, 80, etc.)",
-    "auto"
+    "auto",
   )
   .option("--no-overwrite", "Don't overwrite existing files")
   .action(async (files, options) => {
@@ -285,12 +285,12 @@ program
   .description("Upload all images/videos in a folder")
   .option(
     "-f, --folder <folder>",
-    "Custom Cloudinary folder name (default: use directory structure)"
+    "Custom Cloudinary folder name (default: use directory structure)",
   )
   .option(
     "-q, --quality <quality>",
     "Image quality (auto, 100, 80, etc.)",
-    "auto"
+    "auto",
   )
   .option("-r, --recursive", "Include subdirectories")
   .option("--no-overwrite", "Don't overwrite existing files")
@@ -306,7 +306,7 @@ program
   .option(
     "-q, --quality <quality>",
     "Image quality (auto, 100, 80, etc.)",
-    "auto"
+    "auto",
   )
   .option("--no-overwrite", "Don't overwrite existing files")
   .action(async (options) => {

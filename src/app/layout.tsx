@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
 import { ReactLenis } from "lenis/react";
 import { LedFont } from "@/lib/font";
+import { Unbounded } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
+
+const unbounded = Unbounded({
+  subsets: ["latin"],
+  variable: "--font-unbounded",
+});
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_BASE_URL || "https://aryasatya.vercel.app";
@@ -77,7 +84,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ReactLenis root />
-      <body className={`${LedFont.variable} antialiased`}>
+      <body
+        className={`${LedFont.variable} ${unbounded.variable} ${GeistSans.variable} antialiased`}
+      >
         {children}
         {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
       </body>

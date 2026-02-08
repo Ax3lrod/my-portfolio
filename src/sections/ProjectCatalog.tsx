@@ -115,7 +115,7 @@ const ProjectCard = ({
 
         <div className="flex justify-between items-start mt-3 px-1">
           <div className="max-w-[85%]">
-            <h3 className="text-sm md:text-base font-bold tracking-tight text-neutral-300 group-hover:text-white transition-colors leading-tight">
+            <h3 className="text-sm md:text-base font-display font-bold tracking-tight text-neutral-300 group-hover:text-white transition-colors leading-tight">
               {project.title}
             </h3>
             <span className="text-[10px] md:text-xs font-mono text-neutral-500 mt-1 block group-hover:text-green-400 transition-colors truncate">
@@ -145,7 +145,7 @@ const ProjectCatalog = () => {
   // --- SORTING LOGIC ---
   const sortedProjects = useMemo(() => {
     const filtered = projectArchive.filter((p) =>
-      SELECTED_SLUGS.includes(p.slug)
+      SELECTED_SLUGS.includes(p.slug),
     );
 
     return filtered.sort((a, b) => {
@@ -164,13 +164,13 @@ const ProjectCatalog = () => {
   const col3 = sortedProjects.filter((_, i) => i % 3 === 2);
 
   return (
-    <section className="relative w-full min-h-screen bg-black text-white pt-20 z-30">
+    <section id="projects" className="relative w-full min-h-screen bg-black text-white pt-20 z-30">
       <div className="relative z-10 max-w-400 mx-auto px-6 md:px-12 mb-16 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
         <div>
           <h2 className="font-mono text-xs text-green-500 mb-2 tracking-widest">
             // ARCHIVE_PREVIEW
           </h2>
-          <h3 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase text-white">
+          <h3 className="text-4xl md:text-6xl font-display font-bold tracking-tighter uppercase text-white">
             <GlitchText text="SELECTED WORKS" altText="プロジェクト" />
           </h3>
         </div>

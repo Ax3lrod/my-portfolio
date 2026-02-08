@@ -101,7 +101,7 @@ const AsciiMediaRenderer: React.FC = () => {
       const index = Math.floor((1 - brightness) * (chars.length - 1));
       return chars[Math.max(0, Math.min(chars.length - 1, index))];
     },
-    []
+    [],
   );
 
   const processFrame = useCallback(
@@ -148,7 +148,7 @@ const AsciiMediaRenderer: React.FC = () => {
 
       return lines.join("\n");
     },
-    [config, getAsciiChar]
+    [config, getAsciiChar],
   );
 
   const fetchMedia = useCallback(async () => {
@@ -221,7 +221,7 @@ const AsciiMediaRenderer: React.FC = () => {
             const patchData = new ImageData(
               new Uint8ClampedArray(frame.patch),
               width,
-              height
+              height,
             );
             patchCtx.putImageData(patchData, 0, 0);
             tempCtx.drawImage(patchCanvas, left, top);
@@ -245,7 +245,7 @@ const AsciiMediaRenderer: React.FC = () => {
           video.addEventListener("seeked", onSeek);
         });
         asciiFrames.push(
-          processFrame(video, video.videoWidth, video.videoHeight)
+          processFrame(video, video.videoWidth, video.videoHeight),
         );
       }
     } else if (config.mediaType === "image" && rawImageElementRef.current) {

@@ -1,12 +1,14 @@
 "use client";
 
+import { useState } from "react";
+import Footer from "@/components/layouts/Footer";
+import Preloader from "@/components/Preloader";
+import Achievements from "@/sections/Achievements";
+import CTA from "@/sections/CTA";
 import Hero from "@/sections/Hero";
 import Profile from "@/sections/Profile";
 import ProjectCatalog from "@/sections/ProjectCatalog";
 import TechStack from "@/sections/TechStack";
-import Achievements from "@/sections/Achievements";
-import Preloader from "@/components/Preloader";
-import { useState } from "react";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -47,6 +49,8 @@ export default function Home() {
         <TechStack />
         <ProjectCatalog />
         <Achievements />
+        <CTA />
+        <Footer />
       </div>
     </main>
   );

@@ -115,7 +115,7 @@ const AchievementCard = ({
               AWARD_0{index + 1}
             </span>
           </div>
-          <div className="text-4xl md:text-5xl font-bold text-neutral-800 group-hover:text-neutral-600 transition-colors">
+          <div className="text-4xl md:text-5xl font-display font-bold text-neutral-800 group-hover:text-neutral-600 transition-colors">
             {data.year}
           </div>
           <span className="font-mono text-sm text-neutral-500 tracking-widest mt-1">
@@ -126,7 +126,7 @@ const AchievementCard = ({
         {/* COL 2: CONTENT (6 Cols) */}
         <div className="md:col-span-6 flex flex-col justify-between">
           <div>
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-4 leading-tight group-hover:text-green-400 transition-colors">
+            <h3 className="text-xl md:text-2xl font-display font-bold text-white mb-4 leading-tight group-hover:text-green-400 transition-colors">
               {data.title}
             </h3>
             <p className="text-sm md:text-base text-neutral-400 leading-relaxed font-light">
@@ -165,10 +165,7 @@ const AchievementCard = ({
               <div
                 key={i}
                 onClick={() =>
-                  onImageClick(
-                    `${img}`,
-                    `${data.title} - Evidence ${i + 1}`
-                  )
+                  onImageClick(`${img}`, `${data.title} - Evidence ${i + 1}`)
                 }
                 className="relative aspect-video bg-neutral-800 overflow-hidden rounded-sm border border-neutral-700 group/image cursor-zoom-in"
               >
@@ -216,7 +213,7 @@ const Achievements = () => {
   } | null>(null);
 
   return (
-    <section className="relative w-full bg-black text-white py-24 md:py-10 overflow-hidden">
+    <section id="achievements" className="relative w-full bg-black text-white py-24 md:py-10 overflow-hidden">
       {/* Background Grid Decoration */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-0 right-0 w-1/3 h-full border-l border-neutral-900/50" />
@@ -229,7 +226,7 @@ const Achievements = () => {
           <h2 className="font-mono text-xs text-green-500 mb-2 tracking-widest">
             // HALL_OF_FAME
           </h2>
-          <h3 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase text-white">
+          <h3 className="text-4xl md:text-6xl font-display font-bold tracking-tighter uppercase text-white">
             <GlitchText text="ACHIEVEMENTS" altText="実績" />
           </h3>
         </div>

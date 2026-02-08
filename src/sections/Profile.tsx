@@ -18,12 +18,13 @@ const Profile = () => {
 
   return (
     <section
+      id="profile"
       ref={ref}
       className="relative w-full bg-black text-white py-24 md:py-32 overflow-hidden border-t border-neutral-900"
     >
       {/* Background Decoration */}
       <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none select-none overflow-hidden">
-        <h1 className="text-[20vw] font-bold leading-none text-white tracking-tighter translate-x-1/3">
+        <h1 className="text-[20vw] font-display font-bold leading-none text-white tracking-tighter translate-x-1/3">
           ARYA
         </h1>
       </div>
@@ -69,7 +70,7 @@ const Profile = () => {
             <h2 className="font-mono text-xs text-green-500 mb-6 tracking-widest">
               // OPERATOR_PROFILE
             </h2>
-            <h3 className="text-3xl md:text-5xl font-bold leading-tight mb-6">
+            <h3 className="text-3xl md:text-5xl font-display font-bold leading-tight mb-6">
               Hello!, I'm{" "}
               <GlitchText text="Aryasatya Alaauddin" altText="Ax3lrod" />
             </h3>

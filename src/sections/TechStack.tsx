@@ -51,14 +51,14 @@ const CATEGORIES = [
 
 const TechStack = () => {
   return (
-    <section className="relative w-full bg-black text-white pt-10 overflow-hidden">
+    <section id="stack" className="relative w-full bg-black text-white pt-10 overflow-hidden">
       {/* --- HEADER --- */}
       <div className="relative z-10 max-w-400 mx-auto px-6 md:px-12 mb-6 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
         <div>
           <h2 className="font-mono text-xs text-green-500 mb-2 tracking-widest">
             // TECHNICAL_COMPETENCE
           </h2>
-          <h3 className="text-4xl md:text-6xl font-bold tracking-tighter uppercase text-white">
+          <h3 className="text-4xl md:text-6xl font-display font-bold tracking-tighter uppercase text-white">
             <GlitchText text="SKILLS" altText="スキル" />
           </h3>
         </div>
@@ -80,7 +80,7 @@ const TechStack = () => {
             {[...STACK_MARQUEE, ...STACK_MARQUEE].map((item, i) => (
               <span
                 key={i}
-                className="text-6xl md:text-8xl font-black tracking-tighter text-transparent"
+                className="text-6xl md:text-8xl font-display font-black tracking-tighter text-transparent"
                 style={{ WebkitTextStroke: "1px rgba(255,255,255,0.2)" }}
               >
                 {item}

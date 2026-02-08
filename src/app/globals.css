@@ -1,7 +1,18 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Departure Mono";
+  src: url("/fonts/DepartureMono-Regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-led: var(--font-led);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Departure Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-display: var(--font-unbounded), var(--font-geist-sans), sans-serif;
 }
 
 .text-stroke-white {
@@ -42,8 +53,10 @@
   color: #e0287d; /* Pink/Red */
   z-index: -1;
   opacity: 1;
-  animation: glitch-paths 5s step-end infinite,
-    glitch-opacity 5s step-end infinite, glitch-font 8s step-end infinite,
+  animation:
+    glitch-paths 5s step-end infinite,
+    glitch-opacity 5s step-end infinite,
+    glitch-font 8s step-end infinite,
     glitch-movement 10s step-end infinite;
 }
 
@@ -51,8 +64,10 @@
   color: #1bc7fb; /* Cyan/Blue */
   z-index: -2;
   opacity: 1;
-  animation: glitch-paths 5s step-end infinite,
-    glitch-opacity 5s step-end infinite, glitch-font 7s step-end infinite,
+  animation:
+    glitch-paths 5s step-end infinite,
+    glitch-opacity 5s step-end infinite,
+    glitch-font 7s step-end infinite,
     glitch-movement 8s step-end infinite;
 }
 

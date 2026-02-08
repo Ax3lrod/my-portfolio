@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
 import {
-  motion,
   AnimatePresence,
+  animate,
+  motion,
   useMotionValue,
   useTransform,
-  animate,
 } from "motion/react";
+import React, { useEffect, useState } from "react";
 
 // --- Static Configuration ---
 const STRIP_ONES = Array.from({ length: 101 }, (_, i) => i % 10).reverse();
@@ -30,7 +30,7 @@ const Preloader = ({ onComplete }: { onComplete: () => void }) => {
   });
 
   const statusText = useTransform(countMotion, (latest) =>
-    latest < 100 ? "DECRYPTING..." : "ACCESS GRANTED"
+    latest < 100 ? "DECRYPTING..." : "ACCESS GRANTED",
   );
 
   useEffect(() => {

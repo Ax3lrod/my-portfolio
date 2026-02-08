@@ -7,7 +7,7 @@ import GlitchText from "@/components/GlitchText";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen bg-black text-[#EAEAEA] overflow-hidden">
+    <section id="home" className="relative w-full h-screen bg-black text-[#EAEAEA] overflow-hidden">
       {/* --- LAYER 1: The ASCII Background --- */}
       <div className="absolute inset-0 z-10 opacity-60">
         <AsciiMediaRenderer />
@@ -26,7 +26,7 @@ const Hero = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="text-xl md:text-2xl font-bold tracking-tight">
+            <h1 className="text-xl md:text-2xl font-display font-bold tracking-tight">
               ARYASATYA <span className="text-neutral-500">ALAAUDDIN</span>
             </h1>
             <p className="text-xs font-mono text-neutral-400 mt-1">
@@ -60,12 +60,12 @@ const Hero = () => {
             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="overflow-hidden">
-              <h2 className="text-[12vw] md:text-[8vw] leading-[0.85] font-semibold tracking-tighter text-white">
+              <h2 className="text-[12vw] md:text-[8vw] leading-[0.85] font-display font-bold tracking-tighter text-white">
                 <GlitchText text="SOFTWARE" altText="ソフトウェア" />
               </h2>
             </div>
             <div className="overflow-hidden">
-              <h2 className="text-[12vw] md:text-[8vw] leading-[0.85] font-semibold tracking-tighter text-neutral-500">
+              <h2 className="text-[12vw] md:text-[8vw] leading-[0.85] font-display font-bold tracking-tighter text-neutral-500">
                 <GlitchText text="ENGINEER" altText="エンジニア" />
               </h2>
             </div>
@@ -85,11 +85,25 @@ const Hero = () => {
             </p>
 
             <div className="flex gap-4 pt-4 border-t border-white/20">
-              <button className="group flex items-center gap-2 text-xs font-mono uppercase tracking-wider hover:text-green-400 transition-colors">
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("stack")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="group flex items-center gap-2 text-xs font-mono uppercase tracking-wider hover:text-green-400 transition-colors"
+              >
                 <Cpu size={14} />
                 <span>The Stack</span>
               </button>
-              <button className="group flex items-center gap-2 text-xs font-mono uppercase tracking-wider hover:text-green-400 transition-colors">
+              <button
+                onClick={() =>
+                  document
+                    .getElementById("projects")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="group flex items-center gap-2 text-xs font-mono uppercase tracking-wider hover:text-green-400 transition-colors"
+              >
                 <ArrowDownRight
                   size={14}
                   className="group-hover:-rotate-45 transition-transform"
