@@ -34,7 +34,7 @@ const CATEGORIES = [
     id: "02",
     label: "BACKEND_INFRA",
     icon: Database,
-    items: ["Node.js", "Express.js"],
+    items: ["Node.js", "Express", "Laravel", "NestJs", "MySQL", "PostgreSQL", "MongoDB"],
   },
   {
     id: "03",
@@ -46,7 +46,7 @@ const CATEGORIES = [
     id: "04",
     label: "DEVOPS_&_TOOLS",
     icon: Terminal,
-    items: ["Git / GitHub", "Docker", "Postman", "Figma"],
+    items: ["Git / GitHub", "Docker", "Terraform", "Ansible", "Jenkins", "Kubernetes"],
   },
 ];
 
