@@ -6,7 +6,7 @@ import { motion, useMotionValue, useSpring } from "motion/react";
 const CustomCursor = () => {
   const [isActive, setIsActive] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
-  
+
   // Using motion values for high-performance updates without re-renders
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);

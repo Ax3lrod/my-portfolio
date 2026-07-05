@@ -326,15 +326,23 @@ const AsciiMediaRenderer: React.FC = () => {
 
       <div className="p-4 space-y-4 overflow-y-auto flex-1 custom-scrollbar">
         <div className="space-y-3 bg-neutral-800/50 p-2 rounded">
-          <div className="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">Appearance</div>
+          <div className="text-[10px] uppercase font-bold text-neutral-500 tracking-wider">
+            Appearance
+          </div>
           <div className="space-y-1">
             <div className="flex justify-between">
               <label>Scale (Zoom)</label>
               <span>{config.scale.toFixed(2)}x</span>
             </div>
             <input
-              type="range" min="0.1" max="2" step="0.05" value={config.scale}
-              onChange={(e) => setConfig({ ...config, scale: Number(e.target.value) })}
+              type="range"
+              min="0.1"
+              max="2"
+              step="0.05"
+              value={config.scale}
+              onChange={(e) =>
+                setConfig({ ...config, scale: Number(e.target.value) })
+              }
               className="w-full cursor-pointer"
             />
           </div>

@@ -17,7 +17,7 @@ const RotatingGeo = () => {
     // Mouse Interaction (Parallax) - Subtler
     const x = (mouse.x * window.innerWidth) / 1000;
     const y = (mouse.y * window.innerHeight) / 1000;
-    
+
     meshRef.current.rotation.x += y * 0.02;
     meshRef.current.rotation.y += x * 0.02;
   });
@@ -25,7 +25,7 @@ const RotatingGeo = () => {
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
       <mesh ref={meshRef} scale={1.8}>
-        <icosahedronGeometry args={[1, 0]} /> 
+        <icosahedronGeometry args={[1, 0]} />
         {/* Wireframe Material for Holographic look */}
         <meshBasicMaterial
           color="#22c55e" // green-500
@@ -36,13 +36,13 @@ const RotatingGeo = () => {
       </mesh>
       {/* Inner solid core for depth */}
       <mesh scale={1.75}>
-         <icosahedronGeometry args={[1, 0]} />
-         <meshBasicMaterial
-            color="#22c55e"
-            transparent={true}
-            opacity={0.05}
-            side={THREE.DoubleSide}
-         />
+        <icosahedronGeometry args={[1, 0]} />
+        <meshBasicMaterial
+          color="#22c55e"
+          transparent={true}
+          opacity={0.05}
+          side={THREE.DoubleSide}
+        />
       </mesh>
     </Float>
   );
@@ -55,21 +55,21 @@ interface HologramCanvasProps {
 export const HologramCanvas = ({ className = "" }: HologramCanvasProps) => {
   return (
     <div className={`relative w-full h-full ${className}`}>
-      <Canvas dpr={[1, 2]}> 
+      <Canvas dpr={[1, 2]}>
         <PerspectiveCamera makeDefault position={[0, 0, 5]} />
         <ambientLight intensity={0.5} />
-        
+
         {/* Floating Particles (Cyber Dust) */}
-        <Stars 
-          radius={50} 
-          depth={50} 
-          count={500} 
-          factor={4} 
-          saturation={0} 
-          fade 
-          speed={1} 
+        <Stars
+          radius={50}
+          depth={50}
+          count={500}
+          factor={4}
+          saturation={0}
+          fade
+          speed={1}
         />
-        
+
         <RotatingGeo />
       </Canvas>
     </div>

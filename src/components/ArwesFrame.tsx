@@ -42,7 +42,7 @@ export const ArwesFrame = ({
 
   // Main Path: TopLeft -> TopRight -> BottomRightCut -> BottomLeft -> Z
   const mainPath = `M 0,0 L ${w},0 L ${w},${h - cornerSize} L ${w - cornerSize},${h} L 0,${h} Z`;
-  
+
   // Accents
   const topLeftAccent = `M 0,${cornerSize * 2} L 0,0 L ${cornerSize * 2},0`;
   const bottomRightAccent = `M ${w - cornerSize * 3},${h} L ${w - cornerSize},${h} L ${w},${h - cornerSize} L ${w},${h - cornerSize * 3}`;
@@ -86,7 +86,7 @@ export const ArwesFrame = ({
             initial={{ pathLength: 0 }}
             animate={controls}
             variants={{
-              visible: { pathLength: 1, transition: { duration: 1 } }
+              visible: { pathLength: 1, transition: { duration: 1 } },
             }}
           />
 
@@ -100,7 +100,11 @@ export const ArwesFrame = ({
             initial={{ pathLength: 0, opacity: 0 }}
             animate={controls}
             variants={{
-              visible: { pathLength: 1, opacity: 1, transition: { duration: 0.8, delay: 0.5 } }
+              visible: {
+                pathLength: 1,
+                opacity: 1,
+                transition: { duration: 0.8, delay: 0.5 },
+              },
             }}
           />
 
@@ -113,7 +117,11 @@ export const ArwesFrame = ({
             initial={{ pathLength: 0, opacity: 0 }}
             animate={controls}
             variants={{
-              visible: { pathLength: 1, opacity: 1, transition: { duration: 0.8, delay: 0.7 } }
+              visible: {
+                pathLength: 1,
+                opacity: 1,
+                transition: { duration: 0.8, delay: 0.7 },
+              },
             }}
           />
         </svg>

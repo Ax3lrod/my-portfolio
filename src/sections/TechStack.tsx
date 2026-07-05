@@ -52,7 +52,10 @@ const CATEGORIES = [
 
 const TechStack = () => {
   return (
-    <section id="stack" className="relative w-full bg-black text-white pt-10 overflow-hidden">
+    <section
+      id="stack"
+      className="relative w-full bg-black text-white pt-10 overflow-hidden"
+    >
       {/* --- HEADER --- */}
       <div className="relative z-10 max-w-400 mx-auto px-6 md:px-12 mb-6 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
         <div>
@@ -135,16 +138,16 @@ const TechStack = () => {
 
             {/* Corner Decorations (Visible on Hover) */}
             <div className="absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-               <CornerBracket size={12} className="text-green-500" />
+              <CornerBracket size={12} className="text-green-500" />
             </div>
             <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-               <CornerBracket size={12} className="text-green-500" flipX />
+              <CornerBracket size={12} className="text-green-500" flipX />
             </div>
             <div className="absolute bottom-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-               <CornerBracket size={12} className="text-green-500" flipY />
+              <CornerBracket size={12} className="text-green-500" flipY />
             </div>
             <div className="absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-               <CornerBracket size={12} className="text-green-500" flipX flipY />
+              <CornerBracket size={12} className="text-green-500" flipX flipY />
             </div>
           </div>
         ))}

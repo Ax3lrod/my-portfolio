@@ -53,7 +53,11 @@ const Profile = () => {
               <CornerBracket className="absolute top-0 left-0" />
               <CornerBracket className="absolute top-0 right-0" flipX />
               <CornerBracket className="absolute bottom-0 left-0" flipY />
-              <CornerBracket className="absolute bottom-0 right-0" flipX flipY />
+              <CornerBracket
+                className="absolute bottom-0 right-0"
+                flipX
+                flipY
+              />
             </div>
           </div>
 
@@ -193,4 +197,4 @@ const Profile = () => {
   );
 };
 
-export default Profile
+export default Profile;

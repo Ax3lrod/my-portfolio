@@ -7,7 +7,10 @@ import HologramCanvas from "@/components/3d/HolographicObject";
 
 const CTA = () => {
   return (
-    <section id="contact" className="relative w-full bg-black py-24 md:py-40 overflow-hidden border-t border-neutral-900">
+    <section
+      id="contact"
+      className="relative w-full bg-black py-24 md:py-40 overflow-hidden border-t border-neutral-900"
+    >
       {/* Background Decoration (Hologram) */}
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-screen hidden md:block">
         <HologramCanvas />

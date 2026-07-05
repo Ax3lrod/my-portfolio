@@ -6,34 +6,21 @@ import Image from "@/components/Image";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { projectArchive } from "@/const/projectArchive";
+import { experienceArchive } from "@/const/experienceArchive";
 import GlitchText from "@/components/GlitchText";
 import { getCldVideoUrl } from "next-cloudinary";
-import { CornerBracket, HudFrameDiamond } from "@/components/CyberAssets";
+import { CornerBracket } from "@/components/CyberAssets";
 
-const SELECTED_SLUGS = [
-  "sre-its-official",
-  "petrolida-2025",
-  "ini-lho-its-2025",
-  "ara-6-0",
-  "bem-its",
-];
-
-const ProjectCard = ({
-  project,
-  index,
-}: {
-  project: (typeof projectArchive)[0];
-  index: number;
-}) => {
+const ProjectCard = ({ item, index }: { item: any; index: number }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isVideo =
-    project.cover?.endsWith(".mp4") ||
-    project.cover?.endsWith(".webm") ||
-    project.cover?.includes("video");
+    item.cover?.endsWith(".mp4") ||
+    item.cover?.endsWith(".webm") ||
+    item.cover?.includes("video");
 
   const videoUrl = isVideo
     ? getCldVideoUrl({
-        src: project.cover,
+        src: item.cover,
         width: 640,
         height: 360,
         format: "auto",
@@ -61,6 +48,8 @@ const ProjectCard = ({
     }
   };
 
+  const isProject = item.type === "projects";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -71,25 +60,34 @@ const ProjectCard = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* --- UPDATE: Link sekarang mengarah ke detail page internal --- */}
       <Link
-        href={`/archive/projects/${project.slug}`}
+        href={`/archive/${item.type}/${item.slug}`}
         className="block w-full h-full"
       >
         <div className="relative w-full aspect-video overflow-hidden bg-neutral-900 border border-neutral-800 group-hover:border-neutral-700 transition-colors rounded-sm">
           {/* Decorative Brackets */}
           <div className="absolute top-2 left-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-             <CornerBracket className="text-green-500" size={16} strokeWidth={2} />
+            <CornerBracket
+              className="text-green-500"
+              size={16}
+              strokeWidth={2}
+            />
           </div>
           <div className="absolute bottom-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-             <CornerBracket className="text-green-500" size={16} strokeWidth={2} flipX flipY />
+            <CornerBracket
+              className="text-green-500"
+              size={16}
+              strokeWidth={2}
+              flipX
+              flipY
+            />
           </div>
 
           {/* Badge Active / Present */}
-          {project.endDate === "Present" && (
+          {item.endDate === "Present" && (
             <div className="absolute top-2 left-2 z-30 bg-green-500/20 backdrop-blur-md border border-green-500/30 px-2 py-1 rounded text-[10px] font-mono text-green-400 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              ACTIVE
+              ACTIVE {isProject ? "PROJECT" : "ROLE"}
             </div>
           )}
 
@@ -107,8 +105,8 @@ const ProjectCard = ({
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
             <Image
-              src={project.cover}
-              alt={project.title}
+              src={item.cover}
+              alt={item.title}
               width={640}
               height={360}
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-[0.16,1,0.3,1] scale-100 group-hover:scale-105"
@@ -125,14 +123,14 @@ const ProjectCard = ({
         <div className="flex justify-between items-start mt-3 px-1">
           <div className="max-w-[85%]">
             <h3 className="text-sm md:text-base font-display font-bold tracking-tight text-neutral-300 group-hover:text-white transition-colors leading-tight line-clamp-1">
-              {project.title}
+              {item.title}
             </h3>
             <span className="text-[10px] md:text-xs font-mono text-neutral-500 mt-1 block group-hover:text-green-400 transition-colors truncate">
-              {project.subtitle}
+              {isProject ? item.subtitle : item.role}
             </span>
           </div>
           <span className="text-[10px] font-mono text-neutral-600 whitespace-nowrap mt-0.5">
-            {project.year}
+            {item.year}
           </span>
         </div>
       </Link>
@@ -151,29 +149,32 @@ const ProjectCatalog = () => {
     return () => window.removeEventListener("resize", checkSize);
   }, []);
 
-  // --- SORTING LOGIC ---
-  const sortedProjects = useMemo(() => {
-    const filtered = projectArchive.filter((p) =>
-      SELECTED_SLUGS.includes(p.slug),
-    );
+  const combinedArchive = useMemo(() => {
+    const projects = projectArchive.map((p) => ({ ...p, type: "projects" }));
+    const experiences = experienceArchive.map((e) => ({
+      ...e,
+      type: "experience",
+    }));
 
-    return filtered.sort((a, b) => {
+    return [...projects, ...experiences].sort((a, b) => {
       const aIsActive = a.endDate === "Present";
       const bIsActive = b.endDate === "Present";
       if (aIsActive && !bIsActive) return -1;
       if (!aIsActive && bIsActive) return 1;
       if (b.year !== a.year) return b.year - a.year;
-
       return new Date(b.startDate).getTime() - new Date(a.startDate).getTime();
     });
   }, []);
 
-  const col1 = sortedProjects.filter((_, i) => i % (isDesktop ? 3 : 2) === 0);
-  const col2 = sortedProjects.filter((_, i) => i % (isDesktop ? 3 : 2) === 1);
-  const col3 = sortedProjects.filter((_, i) => i % 3 === 2);
+  const col1 = combinedArchive.filter((_, i) => i % (isDesktop ? 3 : 2) === 0);
+  const col2 = combinedArchive.filter((_, i) => i % (isDesktop ? 3 : 2) === 1);
+  const col3 = combinedArchive.filter((_, i) => i % 3 === 2);
 
   return (
-    <section id="projects" className="relative w-full min-h-screen bg-black text-white pt-20 z-30">
+    <section
+      id="projects"
+      className="relative w-full min-h-screen bg-black text-white pt-20 z-30"
+    >
       <div className="relative z-10 max-w-400 mx-auto px-6 md:px-12 mb-16 flex flex-col md:flex-row justify-between items-end border-b border-neutral-900 pb-6">
         <div>
           <h2 className="font-mono text-xs text-green-500 mb-2 tracking-widest">
@@ -190,26 +191,22 @@ const ProjectCatalog = () => {
         </div>
       </div>
 
-      {/* Grid Container */}
       <div className="max-w-400 mx-auto grid grid-cols-1 md:grid-cols-2 px-6 md:px-12 lg:grid-cols-3 gap-6 md:gap-8 items-start">
-        {/* COLUMN 1 */}
         <div className="flex flex-col">
-          {col1.map((project, idx) => (
-            <ProjectCard key={project.slug} project={project} index={idx} />
+          {col1.map((item, idx) => (
+            <ProjectCard key={item.slug} item={item} index={idx} />
           ))}
         </div>
 
-        {/* COLUMN 2 */}
         <div className="flex flex-col">
-          {col2.map((project, idx) => (
-            <ProjectCard key={project.slug} project={project} index={idx} />
+          {col2.map((item, idx) => (
+            <ProjectCard key={item.slug} item={item} index={idx} />
           ))}
         </div>
 
-        {/* COLUMN 3 (Desktop Only) */}
         <div className="hidden lg:flex flex-col">
-          {col3.map((project, idx) => (
-            <ProjectCard key={project.slug} project={project} index={idx} />
+          {col3.map((item, idx) => (
+            <ProjectCard key={item.slug} item={item} index={idx} />
           ))}
 
           {/* CTA Link */}
@@ -227,7 +224,6 @@ const ProjectCatalog = () => {
           </Link>
         </div>
 
-        {/* Mobile CTA */}
         <div className="block lg:hidden mt-4">
           <Link href="/archive">
             <div className="aspect-video flex items-center justify-center border border-dashed border-neutral-800 rounded-sm group hover:bg-neutral-900 transition-colors cursor-pointer">

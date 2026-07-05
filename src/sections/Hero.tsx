@@ -8,7 +8,10 @@ import { HudScopeThree, HudFrameDiamond } from "@/components/CyberAssets";
 
 const Hero = () => {
   return (
-    <section id="home" className="relative w-full h-screen bg-black text-[#EAEAEA] overflow-hidden">
+    <section
+      id="home"
+      className="relative w-full h-screen bg-black text-[#EAEAEA] overflow-hidden"
+    >
       {/* --- LAYER 1: The ASCII Background --- */}
       <div className="absolute inset-0 z-10 opacity-60">
         <AsciiMediaRenderer />
@@ -51,7 +54,10 @@ const Hero = () => {
             className="hidden md:flex gap-8 text-xs font-mono tracking-wide"
           >
             <div className="flex items-center gap-2">
-              <HudFrameDiamond size={14} className="text-green-500 animate-pulse" />
+              <HudFrameDiamond
+                size={14}
+                className="text-green-500 animate-pulse"
+              />
               SYSTEM ONLINE
             </div>
             <div className="flex items-center gap-2 text-neutral-400">

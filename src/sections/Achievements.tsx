@@ -219,7 +219,10 @@ const Achievements = () => {
   } | null>(null);
 
   return (
-    <section id="achievements" className="relative w-full bg-black text-white py-24 md:py-10 overflow-hidden">
+    <section
+      id="achievements"
+      className="relative w-full bg-black text-white py-24 md:py-10 overflow-hidden"
+    >
       {/* Background Grid Decoration */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <div className="absolute top-0 right-0 w-1/3 h-full border-l border-neutral-900/50" />

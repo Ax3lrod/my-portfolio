@@ -1,18 +1,21 @@
 "use client";
 
-import { useRef, useMemo, useEffect } from "react";
-import { motion } from "motion/react";
+import { useRef, useMemo, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight, Plus, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { projectArchive } from "@/const/projectArchive";
+import { experienceArchive } from "@/const/experienceArchive";
 import { getCldVideoUrl, getCldImageUrl } from "next-cloudinary";
 
 const ArchiveCard = ({
   item,
   index,
+  type,
 }: {
-  item: (typeof projectArchive)[0];
+  item: any;
   index: number;
+  type: "projects" | "experience";
 }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -61,8 +64,8 @@ const ArchiveCard = ({
   return (
     <motion.div
       initial={{ opacity: 0, x: 50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-10%" }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -50 }}
       transition={{
         duration: 0.8,
         delay: index * 0.1,
@@ -73,7 +76,7 @@ const ArchiveCard = ({
       className="group relative h-[65vh] md:h-[75vh] min-w-75 md:min-w-112.5 shrink-0 cursor-pointer overflow-hidden border border-neutral-800 bg-neutral-900 mx-2 md:mx-4 first:ml-0 last:mr-0"
     >
       <Link
-        href={"/archive/projects/" + item.slug || "#"}
+        href={`/archive/${type}/${item.slug || "#"}`}
         className="block h-full w-full"
       >
         <div className="absolute inset-0 overflow-hidden">
@@ -114,7 +117,7 @@ const ArchiveCard = ({
                 <>
                   <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
                   <span className="font-mono text-[10px] tracking-wider uppercase text-green-400">
-                    ACTIVE PROJECT
+                    ACTIVE {type === "projects" ? "PROJECT" : "ROLE"}
                   </span>
                 </>
               ) : (
@@ -130,7 +133,7 @@ const ArchiveCard = ({
 
             <div className="flex justify-between items-end border-t border-white/20 pt-4">
               <span className="font-mono text-xs text-neutral-400 group-hover:text-white transition-colors truncate max-w-50">
-                {item.subtitle}
+                {type === "projects" ? item.subtitle : item.role}
               </span>
               <div className="flex items-center gap-2">
                 <span className="font-mono text-xs text-neutral-500">
@@ -153,16 +156,22 @@ const ArchiveCard = ({
 
 const ArchiveGrid = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [activeTab, setActiveTab] = useState<"projects" | "experience">(
+    "projects",
+  );
+
+  const currentArchive =
+    activeTab === "projects" ? projectArchive : experienceArchive;
 
   const sortedItems = useMemo(() => {
-    return [...projectArchive].sort((a, b) => {
+    return [...currentArchive].sort((a, b) => {
       const aIsActive = a.endDate === "Present";
       const bIsActive = b.endDate === "Present";
       if (aIsActive && !bIsActive) return -1;
       if (!aIsActive && bIsActive) return 1;
       return b.year - a.year;
     });
-  }, []);
+  }, [currentArchive]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -219,17 +228,31 @@ const ArchiveGrid = () => {
       container.removeEventListener("wheel", handleWheel);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [activeTab]); // Re-bind on tab change
 
   return (
     <section className="relative w-full h-screen bg-black text-white flex flex-col justify-center overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[100px_100px] pointer-events-none" />
 
-      <div className="absolute top-8 md:top-12 left-6 md:left-12 z-20">
+      <div className="absolute top-8 md:top-12 left-6 md:left-12 z-30">
         <h2 className="font-mono text-xs text-neutral-500 tracking-widest mb-1">
           // ARCHIVE_VIEW
         </h2>
-        <h1 className="text-xl font-bold tracking-tight">PROJECT_DATABASE</h1>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setActiveTab("projects")}
+            className={`text-xl font-bold tracking-tight transition-colors ${activeTab === "projects" ? "text-green-500" : "text-neutral-600 hover:text-neutral-400"}`}
+          >
+            PROJECTS
+          </button>
+          <span className="text-neutral-800">/</span>
+          <button
+            onClick={() => setActiveTab("experience")}
+            className={`text-xl font-bold tracking-tight transition-colors ${activeTab === "experience" ? "text-green-500" : "text-neutral-600 hover:text-neutral-400"}`}
+          >
+            EXPERIENCE
+          </button>
+        </div>
       </div>
 
       <div className="absolute top-8 md:top-12 right-6 md:right-12 z-20">
@@ -249,13 +272,15 @@ const ArchiveGrid = () => {
 
       <div
         ref={containerRef}
-        className="w-full h-auto overflow-x-auto overflow-y-hidden whitespace-nowrap scrollbar-hide px-8 md:px-12 py-10 flex items-center cursor-grab active:cursor-grabbing"
+        className="w-full h-auto overflow-x-auto overflow-y-hidden whitespace-nowrap scrollbar-hide px-8 md:px-12 py-10 flex items-center cursor-grab active:cursor-grabbing relative z-10 mt-16"
       >
-        {sortedItems.map((item, index) => (
-          <div key={item.slug} className="shrink-0">
-            <ArchiveCard item={item} index={index} />
-          </div>
-        ))}
+        <AnimatePresence mode="wait">
+          {sortedItems.map((item, index) => (
+            <div key={`${activeTab}-${item.slug}`} className="shrink-0">
+              <ArchiveCard item={item} index={index} type={activeTab} />
+            </div>
+          ))}
+        </AnimatePresence>
 
         <div className="shrink-0 h-[65vh] md:h-[75vh] min-w-50 flex flex-col items-center justify-center border-l border-neutral-800 ml-8 text-neutral-600">
           <div className="rotate-90 font-mono text-xs tracking-widest whitespace-nowrap">
@@ -265,7 +290,7 @@ const ArchiveGrid = () => {
       </div>
 
       <div className="absolute bottom-12 left-12 right-12 h-px bg-neutral-900 hidden md:block">
-        <div className="absolute top-0 left-0 h-full w-24 bg-green-900/50" />
+        <div className="absolute top-0 left-0 h-full w-24 bg-green-900/50 transition-colors duration-500" />
       </div>
 
       <style jsx global>{`

@@ -47,8 +47,22 @@ export const Crosshair = ({
     className={className}
     {...props}
   >
-    <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" strokeWidth="1" />
-    <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" strokeWidth="1" />
+    <line
+      x1="12"
+      y1="2"
+      x2="12"
+      y2="22"
+      stroke="currentColor"
+      strokeWidth="1"
+    />
+    <line
+      x1="2"
+      y1="12"
+      x2="22"
+      y2="12"
+      stroke="currentColor"
+      strokeWidth="1"
+    />
     <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="1" />
   </svg>
 );
@@ -200,28 +214,28 @@ export const HudScopeThree = ({
       stroke="currentColor"
       strokeWidth="4"
       strokeLinecap="round"
-      transform="rotate(90 27.5 72.5)" 
-    /> 
+      transform="rotate(90 27.5 72.5)"
+    />
     {/* Correction: Manual Arcs are hard. Let's use simpler approx: 
         Circle r=30. 3 Gaps.
     */}
     <circle cx="50" cy="50" r="2" fill="currentColor" />
     <path
-      d="M 50 15 A 35 35 0 0 1 80.3 32.5" 
+      d="M 50 15 A 35 35 0 0 1 80.3 32.5"
       stroke="currentColor"
       strokeWidth="4"
       strokeLinecap="round"
       transform="rotate(0 50 50)"
     />
     <path
-      d="M 50 15 A 35 35 0 0 1 80.3 32.5" 
+      d="M 50 15 A 35 35 0 0 1 80.3 32.5"
       stroke="currentColor"
       strokeWidth="4"
       strokeLinecap="round"
       transform="rotate(120 50 50)"
     />
     <path
-      d="M 50 15 A 35 35 0 0 1 80.3 32.5" 
+      d="M 50 15 A 35 35 0 0 1 80.3 32.5"
       stroke="currentColor"
       strokeWidth="4"
       strokeLinecap="round"
