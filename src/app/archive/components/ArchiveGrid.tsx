@@ -157,7 +157,7 @@ const ArchiveCard = ({
 const ArchiveGrid = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<"projects" | "experience">(
-    "projects",
+    "experience",
   );
 
   const currentArchive =

@@ -16,10 +16,36 @@ export const projectArchive = [
       "Docker",
       "Machine Learning",
     ],
-    cover: "video1.mp4", // placeholder
+    cover: "steam-review-spam-detector-cover",
     slug: "steam-review-detection",
-    repoLink: null,
+    repoLink: "https://github.com/Ax3lrod/final-project-big-data",
     liveLink: null,
+    contributions: [
+      {
+        title: "Hybrid Architecture Design",
+        description:
+          "Architected a complete data lakehouse system integrating real-time ingestion with Kafka, batch preprocessing with PySpark, and distributed SQL querying using Trino.",
+        image: "projects/steam-review-detection/architecture",
+      },
+      {
+        title: "Streaming & Ingestion Layer",
+        description:
+          "Developed Kafka producers and consumers for real-time ingestion of over 6.4 million Steam reviews, implementing a raw and clean layer storage strategy directly in MinIO.",
+        image: "projects/steam-review-detection/streaming",
+      },
+      {
+        title: "Advanced ML Pipeline (Unsupervised & BERT)",
+        description:
+          "Engineered an ensemble anomaly detection system using Isolation Forest and K-Means clustering for auto-labeling, followed by a Hybrid BERT Classifier fused with engineered linguistic features to predict spam probability with high confidence.",
+        image: "projects/steam-review-detection/ml-pipeline",
+      },
+      {
+        title: "API, Dashboard & Orchestration",
+        description:
+          "Developed a FastAPI backend to serve model inferences and a Streamlit/React dashboard for real-time visualization. Created an automated orchestration script (run_all.sh) to synchronize the deployment of 9+ containerized services.",
+        image: "projects/steam-review-detection/fastapi",
+      },
+    ],
   },
   {
     title: "SustainaMap",
@@ -42,41 +68,66 @@ export const projectArchive = [
     slug: "sustainamap",
     repoLink: "https://github.com/Ax3lrod/sustainamap-fe",
     liveLink: null,
-  },
-  {
-    title: "Virtual Try-On E-Commerce",
-    subtitle: "WebAR Integration App",
-    description:
-      "Engineered a Next.js e-commerce prototype with Augmented Reality (WebAR) capabilities. Developed complex state management for cart operations and sliced a highly interactive UI with Framer Motion.",
-    year: 2024,
-    role: "Fullstack Developer",
-    startDate: "2024-01-01",
-    endDate: "2024-06-01",
-    techStack: [
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion",
-      "WebAR",
+    contributions: [
+      {
+        title: "Interactive Mapping System",
+        description:
+          "Architected a robust mapping interface using Leaflet to visualize complex environmental data layers, including forest monitoring and PLTU (Power Plant) distribution across regions.",
+        image: "projects/sustainamap/map-system",
+      },
+      {
+        title: "Dynamic Layer Management",
+        description:
+          "Developed a dynamic toggle system for switching between different ecological data views, improving the platform's utility for environmental researchers.",
+        image: "projects/sustainamap/layer-management",
+      },
+      {
+        title: "Verified Reporting Pipeline",
+        description:
+          "Built a location-based reporting feature using React-Dropzone for media evidence upload and Zod for strict schema validation, ensuring data integrity for community environmental reports.",
+        image: "projects/sustainamap/reporting",
+      },
+      {
+        title: "Modern Interactive UI under Hackathon Constraints",
+        description:
+          "Sliced and implemented a professional dashboard using HeroUI and Framer Motion, delivering a highly responsive and immersive user experience under tight hackathon deadlines.",
+        image: "projects/sustainamap/ui-dashboard",
+      },
     ],
-    cover: "video2.mp4", // placeholder
-    slug: "virtual-try-on-ecommerce",
-    repoLink: null,
-    liveLink: null,
   },
   {
     title: "ShareITS (GENICS 2.0)",
     subtitle: "Academic Resource Sharing Platform",
     description:
-      "Led the backend development for an intensive 30-day bootcamp project. Architected the REST API and database integration using Node.js/Express, while actively contributing to frontend React integration.",
+      "Led the development of a final project for an intensive 30-day web development bootcamp. Operated as Project Manager for Team 2, managing the overall development lifecycle, encompassing both frontend and backend.",
     year: 2024,
-    role: "Backend Lead / Fullstack",
+    role: "Project Manager / Fullstack Developer",
     startDate: "2024-10-16",
     endDate: "2024-12-09",
     techStack: ["Node.js", "Express", "TypeScript", "Next.js", "React"],
-    cover: "shareitsCover",
+    cover: "shareitscover2",
     slug: "share-its-genics",
-    repoLink: null,
+    repoLink: "https://github.com/Ax3lrod/GENICS-Team-2-Frontend",
     liveLink: null,
+    contributions: [
+      {
+        title: "Backend Architecture & API Design",
+        description:
+          "Led the backend development, establishing the architecture, RESTful routing, and robust database integrations using TypeScript, Node.js, and Express.",
+        image: "projects/share-its-genics/module-list",
+      },
+      {
+        title: "Seamless Frontend Integration",
+        description:
+          "Actively contributed to the frontend repository, ensuring seamless API integration, state management synchronization, and responsive UI components rendering.",
+        image: "projects/share-its-genics/lecturer-list",
+      },
+      {
+        title: "Agile Execution & Project Delivery",
+        description:
+          "Managed the rapid software development lifecycle during a high-intensity 30-day full-stack engineering bootcamp, mimicking real-world cross-functional collaboration.",
+        image: "projects/share-its-genics/create-account",
+      },
+    ],
   },
 ];

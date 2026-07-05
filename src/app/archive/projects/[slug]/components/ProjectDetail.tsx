@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Github, Globe } from "lucide-react";
 import { motion, useScroll } from "motion/react";
 import Image from "@/components/Image";
-import { getCldVideoUrl } from "next-cloudinary";
+import { getCldVideoUrl, getCldImageUrl } from "next-cloudinary";
 
 type ProjectType = (typeof projectArchive)[0];
 
@@ -230,6 +230,48 @@ export default function ProjectDetail({
             <p className="text-neutral-400 text-lg leading-relaxed whitespace-pre-line">
               {project.description}
             </p>
+
+            {project.contributions && project.contributions.length > 0 && (
+              <div className="mt-16 space-y-16">
+                <h2 className="text-3xl font-bold text-white mb-8">
+                  Key Contributions
+                </h2>
+                {project.contributions.map((contribution, idx) => (
+                  <motion.div
+                    key={contribution.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    className="flex flex-col gap-6"
+                  >
+                    {contribution.image && (
+                      <div className="relative w-full aspect-video rounded-sm overflow-hidden border border-neutral-800 bg-neutral-900 group">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={getCldImageUrl({
+                            src: contribution.image,
+                            width: 1280,
+                            height: 720,
+                            format: "auto",
+                            quality: "auto",
+                          })}
+                          alt={contribution.title}
+                          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <h3 className="text-xl font-bold text-green-400 mb-2 tracking-tight">
+                        {contribution.title}
+                      </h3>
+                      <p className="text-neutral-400 leading-relaxed">
+                        {contribution.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
