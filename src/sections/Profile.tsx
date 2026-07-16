@@ -42,7 +42,7 @@ const Profile = () => {
           {/* Image Frame */}
           <div className="relative aspect-3/4 w-full bg-neutral-900 rounded-sm overflow-hidden border border-neutral-800 group">
             <Image
-              src="profile"
+              src="profile3"
               alt="Aryasatya Alaauddin"
               fill
               className="object-cover lg:grayscale group-hover:grayscale-0 transition-all duration-700 ease-out"
@@ -81,10 +81,12 @@ const Profile = () => {
               <GlitchText text="Aryasatya Alaauddin" altText="Ax3lrod" />
             </h3>
             <p className="text-neutral-400 text-lg leading-relaxed max-w-2xl">
-              A passionate Web Developer with a strong focus on Front-End
-              development, specializing in Next.js and React.js. Experienced in
-              building responsive and modern user interfaces, complemented by a
-              solid understanding of Back-End and DevOps principles.
+              Full-stack developer with experience in building scalable web
+              applications and backend services. Skilled in modern web
+              technologies including Next.js, React, and Node.js, with hands-on
+              experience in building responsive and reliable systems. Possess
+              strong foundations in algorithms and data structures, with a
+              strong interest in solving real-world problems through technology.
             </p>
           </motion.div>
 
@@ -112,7 +114,7 @@ const Profile = () => {
                   Bachelor of Computer Science
                 </p>
                 <p className="text-xs font-mono text-green-500 mt-2">
-                  GPA: 3.80 / 4.00
+                  GPA: 3.81 / 4.00
                 </p>
               </div>
             </ArwesFrame>
